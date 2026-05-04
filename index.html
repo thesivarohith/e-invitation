@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arun & Priya — Wedding Invitation</title>
+  <meta name="description"
+    content="You are cordially invited to celebrate the wedding of Arun & Priya. Join us for an unforgettable celebration of love." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- GSAP 3 + ScrollTrigger via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preload" as="video" href="https://res.cloudinary.com/darbjeyc2/video/upload/v1777868423/openenvelope_aa9vca.mp4" />
+
+  <style>
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #FAF7F2;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    html.scroll-locked, body.scroll-locked {
+      overflow: hidden !important;
+      height: 100vh !important;
+      touch-action: none !important;
+      position: fixed !important;
+      width: 100%;
+    }
+
+    /* ---- Fixed Background Elements ---- */
+    #petal-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gold-dots-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gold-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #C9A96E;
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.5); opacity: 0.4; }
+    }
+
+    /* ============================================
+       OPENING SECTION
+    ============================================ */
+    #opening {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: #FAF7F2;
+      overflow: hidden;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #opening-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+      display: none; /* hidden on desktop */
+    }
+
+    .tap-to-open {
+      position: absolute;
+      bottom: 15vh;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      color: #C9A96E;
+      z-index: 5;
+      text-transform: uppercase;
+      animation: gentle-pulse 2s infinite ease-in-out;
+      display: none;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .opening-text-container {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      opacity: 0; /* Hidden initially on mobile, handled by JS */
+    }
+
+    .opening-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 7vw, 3.5rem);
+      color: #C9A96E;
+      letter-spacing: 0.2em;
+    }
+
+    .opening-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3.5vw, 1.6rem);
+      color: #888888;
+      margin-top: 15px;
+    }
+
+    .desktop-scroll-prompt {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      text-align: center;
+      animation: bounce 2s infinite;
+      display: none;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    @media (max-width: 768px) {
+      #opening-video { display: block; }
+      .tap-to-open { display: block; }
+      .opening-text-container { opacity: 0; } /* Will fade in via JS after video */
+    }
+
+    @media (min-width: 769px) {
+      .desktop-scroll-prompt { display: block; }
+      .opening-text-container { opacity: 1; }
+    }
+
+    /* ==============================================
+       FAMILY PROCESSION — Z-AXIS SCROLL
+    ============================================== */
+    #family-procession {
+      position: relative;
+      width: 100%;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .fp-sticky-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 800px;
+    }
+
+    .flower-img {
+      position: absolute;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .flower-layer-back {
+      transform: translateZ(-120px) scale(1.15);
+      opacity: 0.45;
+      z-index: 1;
+    }
+    .flower-layer-mid {
+      transform: translateZ(0px);
+      opacity: 0.6;
+      z-index: 2;
+    }
+    .flower-layer-front {
+      transform: translateZ(80px) scale(0.88);
+      opacity: 0.85;
+      z-index: 4;
+    }
+
+    /* Section Header */
+    .fp-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 14px 0;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .fp-header .line {
+      width: 60px;
+      height: 1px;
+      background: #C9A96E;
+      opacity: 0.6;
+    }
+    .fp-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.5rem, 1.8vw, 0.75rem);
+      letter-spacing: clamp(0.2em, 0.6vw, 0.4em);
+      color: #C9A96E;
+      text-transform: uppercase;
+    }
+
+    /* Person Elements */
+    .person-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      opacity: 0;
+      transform: scale(1.8);
+      filter: blur(8px);
+      will-change: transform, opacity, filter;
+      transform-style: preserve-3d;
+    }
+
+    .person-img {
+      height: 72vh;
+      width: auto;
+      max-width: 92vw;
+      object-fit: contain;
+      object-position: bottom center;
+      margin-bottom: 80px;
+      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
+      z-index: 2;
+      position: relative;
+    }
+
+    .person-info {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      z-index: 3;
+    }
+    .person-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+      color: #C9A96E;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .person-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.9vw, 0.68rem);
+      letter-spacing: 0.25em;
+      color: #777777;
+      text-transform: uppercase;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* Desktop Specifics */
+    @media (min-width: 769px) {
+      .fp-header .line { width: 60px; }
+      
+      .desktop-pair {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none; /* Controlled by JS */
+      }
+      
+      .person-frame.desktop-left { left: 12%; width: 35%; align-items: center; }
+      .person-frame.desktop-right { left: auto; right: 12%; width: 35%; align-items: center; }
+      
+      .person-img { height: 75vh; margin-bottom: 90px; }
+      
+      .person-info { bottom: 25px; }
+      .person-name { font-size: 1.8rem; }
+      
+      /* Parents Desktop Pair */
+      .parents-desktop-grid {
+        position: absolute;
+        width: 80% !important;
+        left: 10%;
+        height: 75vh !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: flex-end;
+        bottom: 80px;
+        transform-style: preserve-3d;
+      }
+      .parents-column {
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        align-items: flex-end;
+        position: relative;
+      }
+      .parents-column img {
+        height: 70vh !important;
+        width: auto !important;
+        max-width: 18vw !important;
+        object-fit: contain;
+      }
+      .parents-column-label {
+        position: absolute;
+        bottom: -50px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.3em;
+        color: #C9A96E;
+        text-transform: uppercase;
+      }
+
+    }
+
+    /* Final Step */
+    .final-frame {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(1.8);
+      filter: blur(8px);
+      transform-style: preserve-3d;
+    }
+    .final-groom { position: absolute; left: 12%; bottom: 80px; height: 75vh; }
+    .final-bride { position: absolute; right: 12%; bottom: 80px; height: 75vh; }
+
+    .couple-text {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(250, 247, 242, 0.85);
+      padding: 15px 30px;
+      backdrop-filter: blur(6px);
+      z-index: 10;
+      width: fit-content;
+      opacity: 0;
+    }
+
+    .couple-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 5vw, 3.5rem);
+      color: #C9A96E;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .couple-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.75rem, 2.5vw, 1.3rem);
+      color: #888888;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .fp-header .line { width: 30px; }
+      .desktop-pair { display: none !important; }
+      .final-groom { left: 0; height: 55vh; bottom: 80px; width: 50%; object-fit: contain; }
+      .final-bride { right: 0; height: 55vh; bottom: 80px; width: 50%; object-fit: contain; }
+      .couple-text { width: 90%; top: 35%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="petal-canvas"></canvas>
+  <div class="gold-dots-container" id="gold-dots"></div>
+
+  <section id="opening">
+    <video id="opening-video" 
+      src="https://res.cloudinary.com/darbjeyc2/video/upload/v1777868423/openenvelope_aa9vca.mp4"
+      muted playsinline disablepictureinpicture preload="auto">
+    </video>
+    
+    <div class="tap-to-open" id="tap-prompt">TAP TO OPEN</div>
+    
+    <div class="opening-text-container" id="opening-text">
+      <div class="opening-names">ARUN • PRIYA</div>
+      <div class="opening-tagline">Together Forever</div>
+    </div>
+
+    <div class="desktop-scroll-prompt" id="desktop-prompt">
+      SCROLL TO BEGIN ↓
+    </div>
+  </section>
+
+  <section id="family-procession">
+    <div class="fp-sticky-container">
+      <div class="fp-header">
+        <div class="line"></div>
+        <h2>WITH THE BLESSINGS OF</h2>
+        <div class="line"></div>
+      </div>
+
+      <!-- ALL PERSON FRAMES -->
+      <!-- Groom Bro -->
+      <div class="person-frame" id="frame-groom_bro">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">RAHUL</div>
+          <div class="person-label">Groom's Brother</div>
+        </div>
+      </div>
+
+      <!-- Bride Bro -->
+      <div class="person-frame" id="frame-bride_bro">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">KARTHIK</div>
+          <div class="person-label">Bride's Brother</div>
+        </div>
+      </div>
+
+      <!-- Groom Sis -->
+      <div class="person-frame" id="frame-groom_sis">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">DIVYA</div>
+          <div class="person-label">Groom's Sister</div>
+        </div>
+      </div>
+
+      <!-- Bride Sis -->
+      <div class="person-frame" id="frame-bride_sis">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">MEENA</div>
+          <div class="person-label">Bride's Sister</div>
+        </div>
+      </div>
+
+      <!-- Groom Dad -->
+      <div class="person-frame" id="frame-groom_dad">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">MR. KUMAR</div>
+          <div class="person-label">Groom's Father</div>
+        </div>
+      </div>
+
+      <!-- Groom Mom -->
+      <div class="person-frame" id="frame-groom_mom">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">MRS. LAKSHMI</div>
+          <div class="person-label">Groom's Mother</div>
+        </div>
+      </div>
+
+      <!-- Bride Dad -->
+      <div class="person-frame" id="frame-bride_dad">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">MR. RAJA</div>
+          <div class="person-label">Bride's Father</div>
+        </div>
+      </div>
+
+      <!-- Bride Mom -->
+      <div class="person-frame" id="frame-bride_mom">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
+        <div class="person-info">
+          <div class="person-name">MRS. SUMATHI</div>
+          <div class="person-label">Bride's Mother</div>
+        </div>
+      </div>
+
+      <!-- Final Reveal -->
+      <div class="final-frame" id="frame-final">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
+        <div class="couple-text">
+          <div class="couple-names">ARUN • PRIYA</div>
+          <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const isMobile = () => window.innerWidth < 769;
+
+    /* ==============================================
+       OPENING VIDEO & INTRO LOGIC
+    ============================================== */
+    function initOpeningLogic() {
+      const isMob = window.innerWidth < 769;
+      const video = document.getElementById('opening-video');
+      const tapPrompt = document.getElementById('tap-prompt');
+      const openingText = document.getElementById('opening-text');
+      const names = openingText.querySelector('.opening-names');
+      const tagline = openingText.querySelector('.opening-tagline');
+
+      if (isMob) {
+        // Mobile Video Logic
+        document.documentElement.classList.add('scroll-locked');
+        document.body.classList.add('scroll-locked');
+        window.scrollTo(0, 0); // Ensure they start at the top
+
+        gsap.set(names, { opacity: 0 });
+        gsap.set(tagline, { opacity: 0 });
+
+        const handlePlayIntent = () => {
+          gsap.to(tapPrompt, { opacity: 0, duration: 0.2 });
+          video.play().catch(e => console.log("Autoplay prevented:", e));
+          
+          window.removeEventListener('touchstart', handlePlayIntent);
+          window.removeEventListener('click', handlePlayIntent);
+          window.removeEventListener('wheel', handlePlayIntent);
+          window.removeEventListener('touchmove', handlePlayIntent);
+        };
+
+        // Trigger on tap or scroll attempt
+        window.addEventListener('touchstart', handlePlayIntent, { passive: true });
+        window.addEventListener('click', handlePlayIntent);
+        window.addEventListener('wheel', handlePlayIntent, { passive: true });
+        window.addEventListener('touchmove', handlePlayIntent, { passive: true });
+
+        video.addEventListener('ended', () => {
+          const tl = gsap.timeline();
+          tl.to(video, { opacity: 0, duration: 1 }) // Fade out the video
+            .to(openingText, { opacity: 1, duration: 0.1 }, "<")
+            .fromTo(names, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, "-=0.5")
+            .fromTo(tagline, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 1 }, "-=0.5")
+            .call(() => {
+              document.documentElement.classList.remove('scroll-locked');
+              document.body.classList.remove('scroll-locked');
+              window.scrollTo({ top: 80, behavior: 'smooth' });
+            }, null, "+=1");
+        });
+      } else {
+        // Desktop Static Logic
+        setTimeout(() => {
+          window.scrollTo({ top: 80, behavior: 'smooth' });
+        }, 2000);
+      }
+    }
+
+    /* ==============================================
+       3D FLOWER DECORATION SYSTEM
+    ============================================== */
+    const flowerImages = [
+      'https://res.cloudinary.com/darbjeyc2/image/upload/v1777909270/Neat_Flower_01_zkluet.png',
+      'https://res.cloudinary.com/darbjeyc2/image/upload/v1777909273/Neat_Flower_02_opbtyi.png'
+    ];
+
+    function randomBetween(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function injectFlowers(container, stepId) {
+      const isMob = window.innerWidth < 769;
+      
+      // Density adjustments based on step
+      let densityMult = 1;
+      if (stepId === 'final') densityMult = 1.3; // Most lush
+
+      const config = {
+        back: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 80, sizeMax: isMob ? 80 : 130, layer: 'flower-layer-back' },
+        mid: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 70, sizeMax: isMob ? 80 : 110, layer: 'flower-layer-mid' },
+        front: { count: isMob ? 6 : 8, sizeMin: isMob ? 65 : 100, sizeMax: isMob ? 90 : 150, layer: 'flower-layer-front' }
+      };
+
+      const placeFlower = (layerConfig, specificPos = null) => {
+        const img = document.createElement('img');
+        img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+        img.className = `flower-img ${layerConfig.layer}`;
+        
+        const size = randomBetween(layerConfig.sizeMin, layerConfig.sizeMax);
+        img.style.width = `${size}px`;
+        img.style.height = 'auto';
+
+        const sw = window.innerWidth;
+        const sh = window.innerHeight;
+        let x, y, rot;
+        
+        if (layerConfig.layer === 'flower-layer-front') {
+          // Extreme corners and edges, bleed off screen
+          const margin = isMob ? -size * 0.6 : -size * 0.4;
+          if (specificPos === 'tl') { x = margin; y = margin; rot = randomBetween(20, 70); }
+          else if (specificPos === 'tr') { x = sw - size - margin; y = margin; rot = randomBetween(-70, -20); }
+          else if (specificPos === 'bl') { x = margin; y = sh - size - margin; rot = randomBetween(-70, -20); }
+          else if (specificPos === 'br') { x = sw - size - margin; y = sh - size - margin; rot = randomBetween(20, 70); }
+          else if (specificPos === 'lm') { x = margin; y = sh/2 - size/2; rot = randomBetween(-30, 30); }
+          else if (specificPos === 'rm') { x = sw - size - margin; y = sh/2 - size/2; rot = randomBetween(-30, 30); }
+          else if (specificPos === 'tm') { x = sw/2 - size/2; y = margin; rot = randomBetween(-30, 30); }
+          else if (specificPos === 'bm') { x = sw/2 - size/2; y = sh - size - margin; rot = randomBetween(-30, 30); }
+        } else {
+          // Mid and Back layers - strictly bound to the 4 edges (bushes effect)
+          const edgePos = Math.random();
+          const m = -size * 0.3; // Allow slight bleed off screen
+          
+          if (edgePos < 0.25) { // Top Edge
+            x = randomBetween(m, sw - size - m);
+            y = randomBetween(-size * 0.5, sh * 0.12);
+          } else if (edgePos < 0.5) { // Bottom Edge
+            x = randomBetween(m, sw - size - m);
+            y = randomBetween(sh * 0.88 - size, sh + size * 0.2);
+          } else if (edgePos < 0.75) { // Left Edge
+            x = randomBetween(-size * 0.6, sw * 0.12);
+            y = randomBetween(m, sh - size - m);
+          } else { // Right Edge
+            x = randomBetween(sw * 0.88 - size, sw + size * 0.2);
+            y = randomBetween(m, sh - size - m);
+          }
+          rot = layerConfig.layer === 'flower-layer-mid' ? randomBetween(-30, 30) : randomBetween(-40, 40);
+        }
+
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        container.appendChild(img);
+
+        // GSAP continuous oscillation
+        gsap.set(img, { rotation: rot });
+        
+        // Increased amplitude for a noticeable 'waving in the wind' effect
+        gsap.to(img, {
+          y: `+=${randomBetween(-35, 35)}`,
+          x: `+=${randomBetween(-25, 25)}`,
+          rotation: rot + randomBetween(-18, 18),
+          duration: randomBetween(2.0, 3.8),
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+          delay: randomBetween(0, 2)
+        });
+      };
+
+      for (let i = 0; i < config.back.count; i++) placeFlower(config.back);
+      for (let i = 0; i < config.mid.count; i++) placeFlower(config.mid);
+      
+      const frontPositions = isMob ? ['tl', 'tr', 'bl', 'br', 'lm', 'rm'] : ['tl', 'tr', 'bl', 'br', 'lm', 'rm', 'tm', 'bm'];
+      frontPositions.forEach(pos => placeFlower(config.front, pos));
+    }
+
+    /* ==============================================
+       FAMILY PROCESSION — Z-AXIS MASTER TIMELINE
+    ============================================== */
+    function initProcession() {
+      const isMob = isMobile();
+      const section = document.getElementById('family-procession');
+      const sticky = section.querySelector('.fp-sticky-container');
+      
+      // Cleanup previous triggers
+      ScrollTrigger.getAll().forEach(t => {
+        if (t.trigger === section) t.kill();
+      });
+
+      // Clear dynamic parents if any
+      const existingParents = document.getElementById('frame-parents-desktop');
+      if (existingParents) existingParents.remove();
+
+      // Master Timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=8000", // Fixed long scroll for cinematic slow feel
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1
+        }
+      });
+
+      const addStep = (el, infoEl, stepId) => {
+        if (!el) return;
+        
+        // Generate a full-screen, dedicated flower layer for this step
+        const fLayer = document.createElement('div');
+        fLayer.className = 'person-frame';
+        fLayer.style.zIndex = 0; // Ensures it's behind the people (z-index 2)
+        sticky.appendChild(fLayer);
+        injectFlowers(fLayer, stepId);
+
+        // Calculate absolute position to perfectly sync all elements
+        const p = tl.recent() ? tl.recent().endTime() : 0;
+        
+        // Entry
+        tl.fromTo(el, 
+          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 10 },
+          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          p
+        );
+        tl.fromTo(fLayer, 
+          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 0 },
+          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          p
+        );
+        if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }, p + 0.6);
+        
+        // Hold
+        tl.to(el, { duration: 2 }); // Extends timeline by 2s
+
+        // Exit
+        const exitP = p + 3; // 1s enter + 2s hold
+        tl.to(el, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
+        tl.to(fLayer, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
+        if (infoEl) tl.to(infoEl, { autoAlpha: 0, duration: 0.4 }, exitP);
+      };
+
+      if (isMob) {
+        const order = ['groom_bro', 'bride_bro', 'groom_sis', 'bride_sis', 'groom_dad', 'groom_mom', 'bride_dad', 'bride_mom', 'final'];
+        order.forEach(id => {
+          const frame = document.getElementById('frame-' + id);
+          if (frame) {
+            const info = id === 'final' ? frame.querySelector('.couple-text') : frame.querySelector('.person-info');
+            addStep(frame, info, id);
+          }
+        });
+      } else {
+        // Desktop: Bros
+        const broL = document.getElementById('frame-groom_bro');
+        const broR = document.getElementById('frame-bride_bro');
+        broL.classList.add('desktop-left'); broR.classList.add('desktop-right');
+        
+        tl.addLabel('bros');
+        addStep(broL, broL.querySelector('.person-info'), 'bros');
+        tl.add(gsap.fromTo(broR, 
+          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
+          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+        ), 'bros');
+        tl.add(gsap.fromTo(broR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'bros+=0.6');
+        tl.add(gsap.to(broR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'bros+=3.4');
+        tl.add(gsap.to(broR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'bros+=3.4');
+
+        // Desktop: Sisters
+        const sisL = document.getElementById('frame-groom_sis');
+        const sisR = document.getElementById('frame-bride_sis');
+        sisL.classList.add('desktop-left'); sisR.classList.add('desktop-right');
+        
+        tl.addLabel('sisters');
+        addStep(sisL, sisL.querySelector('.person-info'), 'sisters');
+        tl.add(gsap.fromTo(sisR, 
+          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
+          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+        ), 'sisters');
+        tl.add(gsap.fromTo(sisR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'sisters+=0.6');
+        tl.add(gsap.to(sisR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'sisters+=3.4');
+        tl.add(gsap.to(sisR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'sisters+=3.4');
+
+        // Desktop: Groom's Parents
+        const gParents = document.createElement('div');
+        gParents.className = 'parents-desktop-grid';
+        gParents.style.justifyContent = 'center';
+        gParents.innerHTML = `
+          <div class="parents-column" style="width:100%">
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" />
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" />
+            <div class="parents-column-label">GROOM'S PARENTS</div>
+          </div>
+        `;
+        sticky.appendChild(gParents);
+        tl.addLabel('gParents');
+        addStep(gParents, null, 'gParents');
+
+        // Desktop: Bride's Parents
+        const bParents = document.createElement('div');
+        bParents.className = 'parents-desktop-grid';
+        bParents.style.justifyContent = 'center';
+        bParents.innerHTML = `
+          <div class="parents-column" style="width:100%">
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" />
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" />
+            <div class="parents-column-label">BRIDE'S PARENTS</div>
+          </div>
+        `;
+        sticky.appendChild(bParents);
+        tl.addLabel('bParents');
+        addStep(bParents, null, 'bParents');
+
+        // Desktop: Final
+        const final = document.getElementById('frame-final');
+        tl.addLabel('final');
+        addStep(final, final.querySelector('.couple-text'), 'final');
+      }
+
+      ScrollTrigger.refresh();
+    }
+
+    window.addEventListener('load', () => {
+      initOpeningLogic();
+      initProcession();
+    });
+
+    // Re-init on resize to handle orientation changes
+    let rt;
+    window.addEventListener('resize', () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        initProcession();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
