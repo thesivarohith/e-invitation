@@ -428,6 +428,498 @@
       .final-groom { left: 0; height: 55vh; bottom: 80px; width: 50%; object-fit: contain; }
       .final-bride { right: 0; height: 55vh; bottom: 80px; width: 50%; object-fit: contain; }
       .couple-text { width: 90%; top: 35%; }
+      .desktop-fan-container { display: none !important; }
+      .mobile-slider-container { display: block !important; }
+    }
+
+    /* ==============================================
+       OUR MOMENTS SECTION
+    ============================================== */
+    #our-moments {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: transparent;
+      z-index: 10;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+
+    .om-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+    .om-header .line {
+      width: 40px;
+      height: 1px;
+      background: #C9A96E;
+      opacity: 0.6;
+    }
+    .om-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+      letter-spacing: clamp(0.2em, 0.6vw, 0.4em);
+      color: #C9A96E;
+      text-transform: uppercase;
+    }
+
+    .om-hint-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.6vw, 0.65rem);
+      letter-spacing: 0.25em;
+      color: #C9A96E;
+      opacity: 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* Desktop Fan Layout */
+    .desktop-fan-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 520px;
+      margin: 40px auto;
+    }
+
+    .om-card {
+      position: absolute;
+      width: 220px;
+      height: 290px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 4px solid #FFFFFF;
+      box-shadow: 0 8px 32px rgba(180,150,100,0.25);
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0);
+      will-change: transform, opacity;
+      background: #FAF7F2;
+    }
+
+    .om-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Mobile Cinematic Layout */
+    .mobile-slider-container {
+      display: none;
+      width: 100vw;
+      height: auto;
+      padding: 20px 0 40px;
+      position: relative;
+    }
+
+    .mobile-om-card {
+      width: 78vw;
+      height: 104vw;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 4px solid #FFFFFF;
+      box-shadow: 0 12px 48px rgba(180,150,100,0.35);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0.6);
+      will-change: transform, opacity;
+      background: #FAF7F2;
+    }
+    .mobile-om-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .om-peek-left, .om-peek-right {
+      position: absolute;
+      top: 20px;
+      width: 60vw;
+      height: 80vw;
+      border-radius: 20px;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.88);
+      filter: blur(2px);
+      pointer-events: none;
+      border: 4px solid rgba(255,255,255,0.5);
+    }
+    .om-peek-left { left: -22vw; }
+    .om-peek-right { left: 62vw; }
+    .om-peek-left img, .om-peek-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .om-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(201,169,110,0.15);
+      border: 1px solid #C9A96E;
+      border-radius: 50%;
+      color: #C9A96E;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .om-arrow-left { left: 12px; }
+    .om-arrow-right { right: 12px; }
+
+    .om-dots-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 25px;
+    }
+    .om-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #C9A96E;
+      opacity: 0.3;
+      transition: all 0.3s ease;
+    }
+    .om-dot.active {
+      opacity: 1;
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    .om-location-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 3vw, 1.1rem);
+      color: #C9A96E;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-top: 15px;
+      opacity: 0;
+    }
+
+    /* Lightbox */
+    #om-lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.94);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+    #om-lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1.5px solid rgba(201,169,110,0.5);
+      transform: scale(0.9);
+      pointer-events: none;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #C9A96E;
+      font-size: 2.5rem;
+      cursor: pointer;
+      padding: 16px;
+      line-height: 1;
+      font-family: sans-serif;
+    }
+    .lightbox-label {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #C9A96E;
+      font-size: 1.2rem;
+    }
+
+    .om-hint-text.desktop-only { display: none; }
+    .om-hint-text.mobile-only { display: block; }
+    @media (min-width: 769px) {
+      .desktop-fan-container { display: flex; }
+      .mobile-slider-container { display: none; }
+      .om-header .line { width: 60px; }
+      .om-hint-text.desktop-only { display: block; }
+      .om-hint-text.mobile-only { display: none; }
+    }
+
+    /* ==============================================
+       DATE REVEAL (SCRATCH CARD)
+    ============================================== */
+    #date-reveal {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: transparent;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dr-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+      letter-spacing: 0.4em;
+      color: #C9A96E;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    .scratch-card-wrapper {
+      position: relative;
+      width: 320px;
+      height: 180px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 2px solid #C9A96E;
+      box-shadow: 0 0 32px rgba(201, 169, 110, 0.5), 0 0 12px rgba(201, 169, 110, 0.3);
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .scratch-card-wrapper {
+        width: 85vw;
+        height: 48vw; /* ~16:9 ratio */
+        max-width: 320px;
+        max-height: 180px;
+      }
+    }
+
+    .scratch-content {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .scratch-ring-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 6px;
+      fill: none;
+      stroke: #C9A96E;
+      stroke-width: 1.5;
+    }
+
+    .scratch-day {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+      letter-spacing: 0.35em;
+      color: #777777;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .scratch-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+      color: #C9A96E;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+
+    .scratch-divider {
+      width: 60px;
+      height: 1px;
+      background: #C9A96E;
+      opacity: 0.5;
+      margin: 10px auto;
+    }
+
+    .scratch-countdown {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
+      color: #888888;
+    }
+
+    #scratch-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 5;
+      cursor: crosshair;
+      border-radius: 14px;
+    }
+
+    .scratch-hint {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      color: rgba(255,255,255,0.85);
+      pointer-events: none;
+      z-index: 6;
+      text-align: center;
+      width: 100%;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .shimmer-effect::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent 0%, rgba(201,169,110,0.3) 50%, transparent 100%);
+      animation: shimmerSweep 0.5s ease-in-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes shimmerSweep {
+      100% { left: 200%; }
+    }
+
+    /* ==============================================
+       CELEBRATION TIMELINE
+    ============================================== */
+    #celebration-timeline {
+      position: relative;
+      width: 100%;
+      height: 500vh;
+      background: transparent;
+      z-index: 10;
+    }
+
+    .timeline-sticky {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .tl-header {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+      letter-spacing: 0.4em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 80px;
+      bottom: 40px;
+      width: 1.5px;
+      background: linear-gradient(to bottom, transparent 0%, #C9A96E 8%, #C9A96E 92%, transparent 100%);
+      z-index: 1;
+      transform: translateX(-50%);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #C9A96E;
+      box-shadow: 0 0 0 4px rgba(201,169,110,0.25);
+      z-index: 3;
+    }
+
+    .timeline-event {
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
+
+    .event-marker {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: #C9A96E;
+      z-index: 2;
+    }
+
+    .event-content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) scale(0.85);
+      width: 40vw;
+      opacity: 0;
+    }
+    
+    .event-content.left { right: calc(50% + 60px); text-align: right; }
+    .event-content.right { left: calc(50% + 60px); text-align: left; }
+
+    .event-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 2vw, 0.8rem);
+      letter-spacing: 0.2em;
+      color: #C9A96E;
+      margin-bottom: 4px;
+    }
+
+    .event-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      color: #333333;
+      margin-bottom: 2px;
+      line-height: 1.1;
+    }
+
+    .event-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+      color: #777777;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line { left: 32px; transform: translateX(-50%); }
+      .timeline-dot { width: 11px; height: 11px; box-shadow: 0 0 0 3px rgba(201,169,110,0.25); }
+      .event-marker { left: 32px; width: 8px; height: 8px; }
+      .event-content {
+        left: 52px !important;
+        right: auto !important;
+        width: 75vw;
+        text-align: left !important;
+      }
     }
   </style>
 </head>
@@ -548,6 +1040,123 @@
     </div>
   </section>
 
+  <!-- ==============================================
+       OUR MOMENTS SECTION
+  ============================================== -->
+  <section id="our-moments">
+    <div class="om-header">
+      <div class="line"></div>
+      <h2>OUR MOMENTS</h2>
+      <div class="line"></div>
+    </div>
+
+    <!-- Desktop Fan Layout -->
+    <div class="desktop-fan-container"></div>
+    <div class="om-hint-text desktop-only">HOVER TO EXPLORE</div>
+
+    <!-- Mobile Cinematic Layout -->
+    <div class="mobile-slider-container">
+      <div class="om-peek-left"><img src="" /></div>
+      
+      <div class="om-nav-arrow om-arrow-left">‹</div>
+      <div class="mobile-om-card"><img src="" /></div>
+      <div class="om-nav-arrow om-arrow-right">›</div>
+      
+      <div class="om-peek-right"><img src="" /></div>
+
+      <div class="om-dots-container">
+        <div class="om-dot"></div>
+        <div class="om-dot"></div>
+        <div class="om-dot"></div>
+        <div class="om-dot"></div>
+        <div class="om-dot"></div>
+        <div class="om-dot"></div>
+      </div>
+      <div class="om-location-label"></div>
+    </div>
+    <div class="om-hint-text mobile-only">SWIPE TO EXPLORE</div>
+  </section>
+
+  <!-- ==============================================
+       DATE REVEAL SCRATCH CARD
+  ============================================== -->
+  <section id="date-reveal">
+    <div class="dr-label">THE BIG DAY</div>
+    <div class="scratch-card-wrapper" id="scratch-wrapper">
+      <div class="scratch-content">
+        <svg class="scratch-ring-icon" viewBox="0 0 40 24">
+          <circle cx="14" cy="12" r="10" />
+          <circle cx="26" cy="12" r="10" />
+        </svg>
+        <div class="scratch-day">SATURDAY</div>
+        <div class="scratch-date">14 February 2026</div>
+        <div class="scratch-divider"></div>
+        <div class="scratch-countdown" id="dr-countdown">Calculating...</div>
+      </div>
+      <canvas id="scratch-canvas"></canvas>
+      <div class="scratch-hint" id="scratch-hint">Scratch to reveal our special day</div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       CELEBRATION TIMELINE
+  ============================================== -->
+  <section id="celebration-timeline">
+    <div class="timeline-sticky">
+      <div class="tl-header">OUR CELEBRATION</div>
+      
+      <div class="timeline-line">
+        <div class="timeline-dot" id="tl-dot"></div>
+      </div>
+
+      <!-- Event 1 -->
+      <div class="timeline-event" style="top: 10%;">
+        <div class="event-marker"></div>
+        <div class="event-content right">
+          <div class="event-time">8:00 AM</div>
+          <div class="event-name">Nalangu</div>
+          <div class="event-desc">Fun pre-wedding ceremony</div>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="timeline-event" style="top: 35%;">
+        <div class="event-marker"></div>
+        <div class="event-content left">
+          <div class="event-time">11:00 AM</div>
+          <div class="event-name">Muhurtham</div>
+          <div class="event-desc">Main wedding ceremony</div>
+        </div>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="timeline-event" style="top: 60%;">
+        <div class="event-marker"></div>
+        <div class="event-content right">
+          <div class="event-time">1:00 PM</div>
+          <div class="event-name">Wedding Lunch</div>
+          <div class="event-desc">Join us for a feast</div>
+        </div>
+      </div>
+
+      <!-- Event 4 -->
+      <div class="timeline-event" style="top: 85%;">
+        <div class="event-marker"></div>
+        <div class="event-content left">
+          <div class="event-time">7:00 PM</div>
+          <div class="event-name">Reception</div>
+          <div class="event-desc">An evening of celebration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="om-lightbox">
+    <div class="lightbox-close">×</div>
+    <img src="" alt="Full Screen Moment">
+    <div class="lightbox-label"></div>
+  </div>
+
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
@@ -631,7 +1240,7 @@
       const config = {
         back: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 80, sizeMax: isMob ? 80 : 130, layer: 'flower-layer-back' },
         mid: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 70, sizeMax: isMob ? 80 : 110, layer: 'flower-layer-mid' },
-        front: { count: isMob ? 6 : 8, sizeMin: isMob ? 65 : 100, sizeMax: isMob ? 90 : 150, layer: 'flower-layer-front' }
+        front: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 65 : 100, sizeMax: isMob ? 90 : 150, layer: 'flower-layer-front' }
       };
 
       const placeFlower = (layerConfig, specificPos = null) => {
@@ -647,63 +1256,36 @@
         const sh = window.innerHeight;
         let x, y, rot;
         
-        if (layerConfig.layer === 'flower-layer-front') {
-          // Extreme corners and edges, bleed off screen
-          const margin = isMob ? -size * 0.6 : -size * 0.4;
-          if (specificPos === 'tl') { x = margin; y = margin; rot = randomBetween(20, 70); }
-          else if (specificPos === 'tr') { x = sw - size - margin; y = margin; rot = randomBetween(-70, -20); }
-          else if (specificPos === 'bl') { x = margin; y = sh - size - margin; rot = randomBetween(-70, -20); }
-          else if (specificPos === 'br') { x = sw - size - margin; y = sh - size - margin; rot = randomBetween(20, 70); }
-          else if (specificPos === 'lm') { x = margin; y = sh/2 - size/2; rot = randomBetween(-30, 30); }
-          else if (specificPos === 'rm') { x = sw - size - margin; y = sh/2 - size/2; rot = randomBetween(-30, 30); }
-          else if (specificPos === 'tm') { x = sw/2 - size/2; y = margin; rot = randomBetween(-30, 30); }
-          else if (specificPos === 'bm') { x = sw/2 - size/2; y = sh - size - margin; rot = randomBetween(-30, 30); }
-        } else {
-          // Mid and Back layers - strictly bound to the 4 edges (bushes effect)
-          const edgePos = Math.random();
-          const m = -size * 0.3; // Allow slight bleed off screen
-          
-          if (edgePos < 0.25) { // Top Edge
-            x = randomBetween(m, sw - size - m);
-            y = randomBetween(-size * 0.5, sh * 0.12);
-          } else if (edgePos < 0.5) { // Bottom Edge
-            x = randomBetween(m, sw - size - m);
-            y = randomBetween(sh * 0.88 - size, sh + size * 0.2);
-          } else if (edgePos < 0.75) { // Left Edge
-            x = randomBetween(-size * 0.6, sw * 0.12);
-            y = randomBetween(m, sh - size - m);
-          } else { // Right Edge
-            x = randomBetween(sw * 0.88 - size, sw + size * 0.2);
-            y = randomBetween(m, sh - size - m);
-          }
-          rot = layerConfig.layer === 'flower-layer-mid' ? randomBetween(-30, 30) : randomBetween(-40, 40);
+        // All layers - strictly bound to the 4 edges (bushes effect)
+        const edgePos = Math.random();
+        const m = -size * 0.3; // Allow slight bleed off screen
+        
+        if (edgePos < 0.25) { // Top Edge
+          x = randomBetween(m, sw - size - m);
+          y = randomBetween(-size * 0.5, sh * 0.12);
+        } else if (edgePos < 0.5) { // Bottom Edge
+          x = randomBetween(m, sw - size - m);
+          y = randomBetween(sh * 0.88 - size, sh + size * 0.2);
+        } else if (edgePos < 0.75) { // Left Edge
+          x = randomBetween(-size * 0.6, sw * 0.12);
+          y = randomBetween(m, sh - size - m);
+        } else { // Right Edge
+          x = randomBetween(sw * 0.88 - size, sw + size * 0.2);
+          y = randomBetween(m, sh - size - m);
         }
+        rot = randomBetween(-40, 40);
 
         img.style.left = `${x}px`;
         img.style.top = `${y}px`;
         container.appendChild(img);
 
-        // GSAP continuous oscillation
+        // Set initial rotation only
         gsap.set(img, { rotation: rot });
-        
-        // Increased amplitude for a noticeable 'waving in the wind' effect
-        gsap.to(img, {
-          y: `+=${randomBetween(-35, 35)}`,
-          x: `+=${randomBetween(-25, 25)}`,
-          rotation: rot + randomBetween(-18, 18),
-          duration: randomBetween(2.0, 3.8),
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: randomBetween(0, 2)
-        });
       };
 
       for (let i = 0; i < config.back.count; i++) placeFlower(config.back);
       for (let i = 0; i < config.mid.count; i++) placeFlower(config.mid);
-      
-      const frontPositions = isMob ? ['tl', 'tr', 'bl', 'br', 'lm', 'rm'] : ['tl', 'tr', 'bl', 'br', 'lm', 'rm', 'tm', 'bm'];
-      frontPositions.forEach(pos => placeFlower(config.front, pos));
+      for (let i = 0; i < config.front.count; i++) placeFlower(config.front);
     }
 
     /* ==============================================
@@ -740,7 +1322,7 @@
         
         // Generate a full-screen, dedicated flower layer for this step
         const fLayer = document.createElement('div');
-        fLayer.className = 'person-frame';
+        fLayer.className = 'person-frame flower-3d-wrapper';
         fLayer.style.zIndex = 0; // Ensures it's behind the people (z-index 2)
         sticky.appendChild(fLayer);
         injectFlowers(fLayer, stepId);
@@ -847,12 +1429,431 @@
         addStep(final, final.querySelector('.couple-text'), 'final');
       }
 
+      // Global Parallax 3D Effect (Continuous Oscillation of the entire scene)
+      // Setting the pivot point back to Z = -120px holds the back flowers perfectly still (top of cone)
+      // We ONLY target .flower-3d-wrapper so the people do NOT oscillate at all!
+      gsap.set('.flower-3d-wrapper', {
+        transformOrigin: "50% 50% -120px"
+      });
+      gsap.to('.flower-3d-wrapper', {
+        rotationX: 3.5,
+        duration: 3.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1
+      });
+      gsap.to('.flower-3d-wrapper', {
+        rotationY: 4.5,
+        duration: 4.2,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1
+      });
+
       ScrollTrigger.refresh();
+    }
+
+    /* ==============================================
+       OUR MOMENTS SECTION LOGIC
+    ============================================== */
+    const momentsData = [
+      { id: 0, label: "By The River", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947993/riverside_csq5oz.jpg" },
+      { id: 1, label: "Forest Path", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947982/forest_mlapox.jpg" },
+      { id: 2, label: "Rooftop Sunset", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947983/rooftop_xilknd.jpg" },
+      { id: 3, label: "Beach", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947976/beach_hyxonn.jpg" },
+      { id: 4, label: "Garden Arch", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947987/arch_e6fauu.jpg" },
+      { id: 5, label: "Cafe Street", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947989/cafe_yenzze.jpg" }
+    ];
+
+    function initOurMoments() {
+      const section = document.getElementById('our-moments');
+      if (!section) return;
+      const isMob = window.innerWidth < 769;
+
+      const header = section.querySelector('.om-header');
+      const hintDesk = section.querySelector('.om-hint-text.desktop-only');
+      const hintMob = section.querySelector('.om-hint-text.mobile-only');
+      const lightbox = document.getElementById('om-lightbox');
+      const lbImg = lightbox.querySelector('img');
+      const lbLabel = lightbox.querySelector('.lightbox-label');
+      const lbClose = lightbox.querySelector('.lightbox-close');
+
+      let currentLbIndex = 0;
+
+      const openLightbox = (index) => {
+        currentLbIndex = index;
+        lbImg.src = momentsData[index].src;
+        lbLabel.innerText = momentsData[index].label;
+        lightbox.style.display = 'flex';
+        gsap.to(lightbox, { opacity: 1, duration: 0.3 });
+        gsap.fromTo(lbImg, { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(1.4)" });
+        document.documentElement.classList.add('scroll-locked');
+        document.body.classList.add('scroll-locked');
+      };
+
+      const closeLightbox = () => {
+        gsap.to(lightbox, { opacity: 0, duration: 0.3, onComplete: () => {
+          lightbox.style.display = 'none';
+          document.documentElement.classList.remove('scroll-locked');
+          document.body.classList.remove('scroll-locked');
+        }});
+        gsap.to(lbImg, { scale: 0.9, duration: 0.3 });
+      };
+
+      lbClose.onclick = closeLightbox;
+
+      // Lightbox swipe navigation
+      let lbTouchStartX = 0;
+      lightbox.addEventListener('touchstart', e => lbTouchStartX = e.changedTouches[0].screenX, {passive:true});
+      lightbox.addEventListener('touchend', e => {
+        let lbTouchEndX = e.changedTouches[0].screenX;
+        if (lbTouchStartX - lbTouchEndX > 50) {
+          currentLbIndex = (currentLbIndex + 1) % momentsData.length;
+          openLightbox(currentLbIndex);
+        } else if (lbTouchEndX - lbTouchStartX > 50) {
+          currentLbIndex = (currentLbIndex - 1 + momentsData.length) % momentsData.length;
+          openLightbox(currentLbIndex);
+        }
+      }, {passive:true});
+
+      // Entry Animation for Header
+      gsap.fromTo(header, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", scrollTrigger: {
+          trigger: section, start: "top 75%"
+        }}
+      );
+      
+      const activeHint = isMob ? hintMob : hintDesk;
+      gsap.to(activeHint, { opacity: 0.65, duration: 0.8, delay: 0.6, scrollTrigger: { trigger: section, start: "top 75%" } });
+
+      if (!isMob) {
+        // Desktop Fan Logic
+        const fanContainer = section.querySelector('.desktop-fan-container');
+        fanContainer.innerHTML = '';
+        
+        const transforms = [
+          { rotate: 8, x: -260, y: 10 },
+          { rotate: 4, x: -150, y: -15 },
+          { rotate: -3, x: -50, y: 5 },
+          { rotate: 5, x: 60, y: -10 },
+          { rotate: -6, x: 165, y: 8 },
+          { rotate: 3, x: 270, y: -5 }
+        ];
+
+        const cards = [];
+        momentsData.forEach((data, i) => {
+          const card = document.createElement('div');
+          card.className = 'om-card';
+          card.innerHTML = `<img src="${data.src}" alt="${data.label}">`;
+          
+          gsap.set(card, { 
+            rotation: transforms[i].rotate, 
+            x: transforms[i].x, 
+            y: transforms[i].y,
+            transformOrigin: "50% 100%"
+          });
+          
+          fanContainer.appendChild(card);
+          cards.push({ el: card, origin: transforms[i] });
+
+          card.onclick = () => openLightbox(i);
+
+          card.onmouseenter = () => {
+            cards.forEach((c, idx) => {
+              if (idx === i) {
+                gsap.to(c.el, { rotation: 0, scale: 1.08, zIndex: 10, duration: 0.4, ease: "back.out(1.4)", overwrite: "auto" });
+              } else if (idx < i) {
+                gsap.to(c.el, { x: c.origin.x - 80, scale: 0.95, zIndex: 1, duration: 0.4, ease: "back.out(1.4)", overwrite: "auto" });
+              } else {
+                gsap.to(c.el, { x: c.origin.x + 80, scale: 0.95, zIndex: 1, duration: 0.4, ease: "back.out(1.4)", overwrite: "auto" });
+              }
+            });
+          };
+
+          card.onmouseleave = () => {
+            cards.forEach(c => {
+              gsap.to(c.el, { 
+                rotation: c.origin.rotate, 
+                x: c.origin.x, 
+                scale: 1, 
+                zIndex: 1, 
+                duration: 0.4, 
+                ease: "back.out(1.4)",
+                overwrite: "auto"
+              });
+            });
+          };
+        });
+
+        gsap.to(cards.map(c=>c.el), {
+          scale: 1,
+          opacity: 1,
+          stagger: 0.08,
+          ease: "elastic.out(1, 0.5)",
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 65%"
+          }
+        });
+
+      } else {
+        // Mobile Cinematic Logic
+        let activeIdx = 0;
+        const activeCardContainer = section.querySelector('.mobile-om-card');
+        const activeCard = activeCardContainer.querySelector('img');
+        const peekL = section.querySelector('.om-peek-left img');
+        const peekR = section.querySelector('.om-peek-right img');
+        const dots = section.querySelectorAll('.om-dot');
+        const label = section.querySelector('.om-location-label');
+
+        const updateViews = (direction = 0) => {
+          const prevIdx = (activeIdx - 1 + momentsData.length) % momentsData.length;
+          const nextIdx = (activeIdx + 1) % momentsData.length;
+
+          if (direction !== 0) {
+            const outX = direction === 1 ? -window.innerWidth * 1.2 : window.innerWidth * 1.2;
+            const inX = direction === 1 ? window.innerWidth * 1.2 : -window.innerWidth * 1.2;
+
+            gsap.to(activeCardContainer, { x: outX, opacity: 0, scale: 0.8, duration: 0.45, ease: "power2.in", onComplete: () => {
+              activeCard.src = momentsData[activeIdx].src;
+              peekL.src = momentsData[prevIdx].src;
+              peekR.src = momentsData[nextIdx].src;
+              label.innerText = momentsData[activeIdx].label;
+              
+              gsap.fromTo(activeCardContainer, 
+                { x: inX, opacity: 0, scale: 0.8 },
+                { x: 0, opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }
+              );
+              gsap.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+            }});
+            gsap.to(label, { opacity: 0, duration: 0.2 });
+
+          } else {
+            activeCard.src = momentsData[activeIdx].src;
+            peekL.src = momentsData[prevIdx].src;
+            peekR.src = momentsData[nextIdx].src;
+            label.innerText = momentsData[activeIdx].label;
+            gsap.to(label, { opacity: 1, duration: 0.4, delay: 0.5 });
+          }
+
+          dots.forEach((d, i) => {
+            if (i === activeIdx) d.classList.add('active');
+            else d.classList.remove('active');
+          });
+        };
+
+        gsap.to(activeCardContainer, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "back.out(1.4)",
+          scrollTrigger: { trigger: section, start: "top 70%" }
+        });
+        gsap.to('.om-peek-left, .om-peek-right', {
+          opacity: 0.45,
+          duration: 0.8,
+          delay: 0.2,
+          scrollTrigger: { trigger: section, start: "top 70%" }
+        });
+
+        updateViews(0);
+
+        activeCardContainer.onclick = () => openLightbox(activeIdx);
+
+        const goNext = () => { activeIdx = (activeIdx + 1) % momentsData.length; updateViews(1); };
+        const goPrev = () => { activeIdx = (activeIdx - 1 + momentsData.length) % momentsData.length; updateViews(-1); };
+
+        section.querySelector('.om-arrow-right').onclick = goNext;
+        section.querySelector('.om-arrow-left').onclick = goPrev;
+
+        let startX = 0;
+        const sliderContainer = section.querySelector('.mobile-slider-container');
+        sliderContainer.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX, {passive:true});
+        sliderContainer.addEventListener('touchend', e => {
+          let endX = e.changedTouches[0].screenX;
+          if (startX - endX > 50) goNext();
+          else if (endX - startX > 50) goPrev();
+        }, {passive:true});
+
+        // Add trackpad/mouse-wheel horizontal scroll support
+        let isWheeling = false;
+        sliderContainer.addEventListener('wheel', e => {
+          if (isWheeling) return;
+          if (Math.abs(e.deltaX) > 20) {
+            isWheeling = true;
+            if (e.deltaX > 0) goNext();
+            else goPrev();
+            setTimeout(() => isWheeling = false, 800); // Debounce
+          }
+        }, {passive:true});
+      }
+    }
+
+    /* ==============================================
+       DATE REVEAL LOGIC
+    ============================================== */
+    function initDateReveal() {
+      const section = document.getElementById('date-reveal');
+      if (!section) return;
+
+      const weddingDate = new Date('2026-02-14T00:00:00').getTime();
+      const today = new Date().getTime();
+      const days = Math.max(0, Math.ceil((weddingDate - today) / 86400000));
+      document.getElementById('dr-countdown').innerText = `${days} Days To Go`;
+
+      gsap.fromTo('.dr-label', 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: section, start: "top 75%" } }
+      );
+
+      const wrapper = document.getElementById('scratch-wrapper');
+      const canvas = document.getElementById('scratch-canvas');
+      const hint = document.getElementById('scratch-hint');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let isDrawing = false;
+      let strokesCompleted = 0;
+      let isRevealed = false;
+
+      const setupCanvas = () => {
+        if (isRevealed) return;
+        const rect = wrapper.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#C9A96E');
+        grad.addColorStop(0.3, '#E8C97A');
+        grad.addColorStop(0.6, '#B8860B');
+        grad.addColorStop(1, '#C9A96E');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'destination-out';
+      };
+
+      setupCanvas();
+
+      const getPos = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+      };
+
+      const scratch = (e) => {
+        if (!isDrawing || isRevealed) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 40, 0, Math.PI * 2);
+        ctx.fill();
+      };
+
+      const startScratch = (e) => {
+        if (isRevealed) return;
+        isDrawing = true;
+        scratch(e);
+      };
+
+      const endScratch = () => {
+        if (!isDrawing || isRevealed) return;
+        isDrawing = false;
+        strokesCompleted++;
+        
+        if (strokesCompleted === 2) {
+          isRevealed = true;
+          gsap.to([canvas, hint], { opacity: 0, duration: 0.6, ease: "power2.out", onComplete: () => {
+            canvas.remove();
+            hint.remove();
+            wrapper.classList.add('shimmer-effect');
+            gsap.fromTo(wrapper, { scale: 1 }, { scale: 1.04, duration: 0.2, yoyo: true, repeat: 1, ease: "power1.inOut" });
+          }});
+        }
+      };
+
+      canvas.addEventListener('mousedown', startScratch);
+      canvas.addEventListener('mousemove', scratch);
+      window.addEventListener('mouseup', endScratch);
+
+      canvas.addEventListener('touchstart', startScratch, {passive:false});
+      canvas.addEventListener('touchmove', scratch, {passive:false});
+      window.addEventListener('touchend', endScratch);
+
+      window.addEventListener('resize', () => {
+        if (!isRevealed) setupCanvas();
+      });
+    }
+
+    /* ==============================================
+       CELEBRATION TIMELINE LOGIC
+    ============================================== */
+    function initTimeline() {
+      const section = document.getElementById('celebration-timeline');
+      if (!section) return;
+
+      const header = section.querySelector('.tl-header');
+      const dot = document.getElementById('tl-dot');
+      const events = section.querySelectorAll('.timeline-event');
+
+      gsap.fromTo(header, 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: section, start: "top 75%" } }
+      );
+
+      // 1. The Dot Scrubbing (Managed by GSAP)
+      gsap.to(dot, {
+        top: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1
+        }
+      });
+
+      // 2. The Event Popups (Managed by Native Scroll for absolute precision)
+      const eventData = Array.from(events).map(ev => {
+        return {
+          content: ev.querySelector('.event-content'),
+          marker: ev.querySelector('.event-marker'),
+          percent: parseFloat(ev.style.top) / 100,
+          fired: false
+        };
+      });
+
+      const handleTimelineScroll = () => {
+        const rect = section.getBoundingClientRect();
+        const maxScroll = rect.height - window.innerHeight;
+        // Progress is 0 when section top hits viewport top, and 1 when bottom hits bottom
+        const progress = -rect.top / maxScroll;
+        
+        eventData.forEach(ev => {
+          if (progress >= ev.percent && !ev.fired) {
+            ev.fired = true;
+            gsap.fromTo(ev.content, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)", overwrite: "auto" });
+            gsap.fromTo(ev.marker, { boxShadow: "0 0 0 0 rgba(201,169,110,0.8)" }, { boxShadow: "0 0 0 10px rgba(201,169,110,0)", duration: 0.8, overwrite: "auto" });
+          } else if (progress < ev.percent && ev.fired) {
+            ev.fired = false;
+            gsap.fromTo(ev.content, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.85, duration: 0.4, ease: "power2.in", overwrite: "auto" });
+          }
+        });
+      };
+
+      window.addEventListener('scroll', handleTimelineScroll, { passive: true });
+      handleTimelineScroll(); // Initial check
     }
 
     window.addEventListener('load', () => {
       initOpeningLogic();
       initProcession();
+      initOurMoments();
+      initDateReveal();
+      initTimeline();
     });
 
     // Re-init on resize to handle orientation changes
@@ -862,6 +1863,9 @@
       rt = setTimeout(() => {
         ScrollTrigger.getAll().forEach(t => t.kill());
         initProcession();
+        initOurMoments();
+        initDateReveal();
+        initTimeline();
       }, 500);
     });
   </script>
