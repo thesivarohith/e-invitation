@@ -1047,6 +1047,432 @@
       }
       .event-icon { font-size: 1.8rem; }
     }
+    /* ============================================
+       VENUE SECTION
+    ============================================ */
+    .venue-section {
+      padding: 100px 20px;
+      background: #FAF7F2;
+      text-index: 10;
+    }
+
+    .venue-header {
+      text-align: center;
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      opacity: 0;
+    }
+    .vh-line {
+      flex: 1;
+      height: 1px;
+      background: #C9A96E;
+      max-width: 60px;
+    }
+    .vh-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+      letter-spacing: 0.35em;
+      color: #C9A96E;
+      text-transform: uppercase;
+    }
+
+    .venue-image-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 70vh;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      transform: scale(1.08);
+    }
+    .venue-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .venue-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 30%, rgba(20,15,10,0.75) 100%);
+    }
+    .venue-text-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 32px 40px;
+      color: #FFFFFF;
+    }
+    .venue-name-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .venue-line {
+      width: 60px;
+      height: 1px;
+      background: #C9A96E;
+      margin-bottom: 12px;
+    }
+    .venue-addr-overlay {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 1.6vw, 0.8rem);
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    .elegant-text-details {
+      text-align: center;
+      margin-top: 48px;
+    }
+    .etd-ornament { width: 30px; margin-bottom: 16px; opacity: 0.6; }
+    .etd-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+      letter-spacing: 0.3em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .etd-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: #333333;
+      margin-bottom: 12px;
+    }
+    .etd-addr {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.65rem, 1.8vw, 0.85rem);
+      color: #888888;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+    }
+    .etd-line {
+      width: 40px;
+      height: 1px;
+      background: #C9A96E;
+      margin: 20px auto;
+      opacity: 0.5;
+    }
+    .etd-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      color: #C9A96E;
+    }
+
+    .google-maps-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .map-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+      letter-spacing: 0.3em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .map-frame-wrapper {
+      width: 100%;
+      max-width: 700px;
+      height: 300px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(201,169,110,0.3);
+      box-shadow: 0 8px 32px rgba(180,150,100,0.12);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .map-frame-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      filter: grayscale(20%) sepia(10%);
+    }
+
+    /* ============================================
+       DRESS CODE & RSVP
+    ============================================ */
+    .dress-rsvp-section {
+      padding: 100px 20px;
+      background: #FAF7F2;
+    }
+    .dr-header {
+      text-align: center;
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .dr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 60px;
+      max-width: 900px;
+      margin: 50px auto 0;
+      align-items: start;
+    }
+    .dr-divider {
+      background: rgba(201,169,110,0.3);
+      height: 100%;
+    }
+    .dr-col { text-align: center; opacity: 0; transform: translateY(20px); }
+    
+    .dr-icon { width: 40px; margin-bottom: 16px; fill: #C9A96E; }
+    .dr-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.8vw, 0.72rem);
+      letter-spacing: 0.3em;
+      color: #C9A96E;
+      text-transform: uppercase;
+    }
+    .dr-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: #333333;
+      margin-top: 8px;
+    }
+    .dr-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      font-style: italic;
+      color: #888888;
+      margin-top: 8px;
+    }
+    .dr-line {
+      width: 40px;
+      height: 1px;
+      background: #C9A96E;
+      margin: 20px auto;
+      opacity: 0.5;
+    }
+
+    .swatches {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid #C9A96E;
+    }
+    .swatch.white { background: #FFFFFF; }
+    .swatch.gold { background: #C9A96E; }
+    .swatch.cream { background: #FAF7F2; }
+
+    .dr-hint {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
+      font-style: italic;
+      color: #999999;
+      margin-top: 12px;
+    }
+
+    .rsvp-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #C9A96E;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .rsvp-form {
+      max-width: 320px;
+      margin: 24px auto 0;
+      text-align: left;
+    }
+    .rsvp-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(201,169,110,0.5);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #333333;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+    .rsvp-input:focus { border-bottom-color: #C9A96E; outline: none; }
+    .rsvp-btns { display: flex; gap: 12px; margin-top: 20px; }
+    .rsvp-btn {
+      flex: 1;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.5vw, 0.65rem);
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: transparent;
+      text-transform: uppercase;
+    }
+    .rsvp-btn.attending { border: 1.5px solid #C9A96E; color: #C9A96E; }
+    .rsvp-btn.attending.active { background: #C9A96E; color: #FFFFFF; }
+    .rsvp-btn.unable { border: 1.5px solid #CCCCCC; color: #999999; }
+    .rsvp-btn.unable.active { background: #999999; color: #FFFFFF; }
+
+    .rsvp-submit {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      background: #C9A96E;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 1.6vw, 0.72rem);
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(201,169,110,0.3);
+      transition: all 0.3s;
+    }
+    .rsvp-submit:hover { background: #B8965E; transform: translateY(-2px); }
+
+    .rsvp-success { display: none; text-align: center; padding: 20px; }
+    .success-icon { width: 50px; margin-bottom: 16px; opacity: 0; }
+    .success-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #C9A96E;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .success-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #888888; }
+
+    /* ============================================
+       CLOSING SECTION
+    ============================================ */
+    .closing-section {
+      width: 100%;
+      height: 100vh;
+      background: #FAF7F2;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .closing-bg-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .closing-mandala {
+      position: absolute;
+      width: 280px;
+      opacity: 0.06;
+      animation: spin 60s linear infinite;
+      z-index: 1;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .closing-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .closing-ornament-line { width: 60px; height: 1px; background: #C9A96E; margin: 0 auto 20px; opacity: 0.6; }
+    .closing-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+      letter-spacing: 0.4em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .closing-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: #2C2C2C;
+      letter-spacing: 0.12em;
+    }
+    .closing-diamond { color: #C9A96E; font-size: 1.2rem; margin: 16px 0; }
+    .closing-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: #C9A96E;
+      letter-spacing: 0.2em;
+    }
+    .closing-quote {
+      margin-top: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: #888888;
+      line-height: 1.6;
+    }
+    .closing-rings-svg { width: 80px; height: 40px; margin: 32px auto; }
+    .closing-bottom-text {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.45rem, 1.3vw, 0.6rem);
+      letter-spacing: 0.2em;
+      color: #BBBBBB;
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: #2C2410;
+      padding: 32px 20px;
+      text-align: center;
+    }
+    .footer-mandala { width: 30px; opacity: 0.5; margin-bottom: 16px; }
+    .footer-names {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+      letter-spacing: 0.3em;
+      color: rgba(201,169,110,0.7);
+      text-transform: uppercase;
+    }
+    .footer-credit {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      color: rgba(255,255,255,0.3);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .venue-section, .dress-rsvp-section { padding: 80px 20px; }
+      .venue-image-container { height: 50vh; border-radius: 16px; }
+      .venue-text-overlay { padding: 20px 24px; }
+      .map-frame-wrapper { height: 220px; }
+
+      .dr-grid { grid-template-columns: 1fr; gap: 40px; }
+      .dr-divider { height: 1px; width: 80px; margin: 0 auto; }
+      
+      .closing-mandala { width: 180px; }
+    }
   </style>
 </head>
 
@@ -1329,6 +1755,159 @@
       </div>
     </div>
   </section>
+
+  <!-- ============================================
+       SECTION 1 — VENUE
+  ============================================ -->
+  <section id="venue" class="venue-section">
+    <div class="venue-header">
+      <div class="vh-line"></div>
+      <div class="vh-text">THE VENUE</div>
+      <div class="vh-line"></div>
+    </div>
+
+    <div class="venue-image-container">
+      <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777970651/venue_xmugh6.jpg" alt="The Grand Palace" class="venue-img">
+      <div class="venue-overlay"></div>
+      <div class="venue-text-overlay">
+        <h2 class="venue-name-big">THE GRAND PALACE</h2>
+        <div class="venue-line"></div>
+        <p class="venue-addr-overlay">
+          12 Royal Garden Road, Coimbatore<br>
+          Tamil Nadu — 641 001
+        </p>
+      </div>
+    </div>
+
+    <div class="elegant-text-details">
+      <svg class="etd-ornament" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 10 L55 45 L95 50 L55 55 L50 90 L45 55 L5 50 L45 45 Z" fill="#C9A96E"/>
+      </svg>
+      <div class="etd-tag">JOIN US AT</div>
+      <h3 class="etd-name">The Grand Palace</h3>
+      <p class="etd-addr">
+        12 Royal Garden Road<br>
+        Coimbatore, Tamil Nadu — 641 001
+      </p>
+      <div class="etd-line"></div>
+      <p class="etd-time">Saturday · 14 February 2027 · 8:00 AM onwards</p>
+    </div>
+
+    <div class="google-maps-container">
+      <div class="map-tag">FIND US</div>
+      <div class="map-frame-wrapper">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.265!2d76.9558!3d11.0168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDAxJzAwLjUiTiA3NsKwNTcnMjAuOSJF!5e0!3m2!1sen!2sin!4v1234567890" 
+          allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 2 — DRESS CODE + RSVP
+  ============================================ -->
+  <section id="dress-rsvp" class="dress-rsvp-section">
+    <div class="dr-header">
+      <div class="vh-line"></div>
+      <div class="vh-text">JOIN THE CELEBRATION</div>
+      <div class="vh-line"></div>
+    </div>
+
+    <div class="dr-grid">
+      <!-- Dress Code -->
+      <div class="dr-col dress-col">
+        <svg class="dr-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 8c0-1.1-.9-2-2-2h-3.5c-.28 0-.5.22-.5.5v.5c0 .28.22.5.5.5H19v2h-1v-2c0-.55-.45-1-1-1h-1.5c-.28 0-.5.22-.5.5v.5c0 .28.22.5.5.5h.5v2h-8v-2h.5c.28 0 .5-.22.5-.5v-.5c0-.28-.22-.5-.5-.5H7.5c-.55 0-1 .45-1 1v2H5.5v-2H8c.28 0 .5-.22.5-.5v-.5c0-.28-.22-.5-.5-.5H4c-1.1 0-2 .9-2 2s.9 2 2 2h3.5c.28 0 .5-.22.5-.5v-.5c0-.28-.22-.5-.5-.5H5v-2h1v2c0 .55.45 1 1 1h1.5c.28 0 .5-.22.5-.5v-.5c0-.28-.22-.5-.5-.5h-.5v-2h8v2h-.5c-.28 0-.5.22-.5.5v.5c0 .28.22.5.5.5h1.5c.55 0 1-.45 1-1v-2H18.5v2H16c-.28 0-.5.22-.5.5v.5c0 .28.22.5.5.5h3.5c1.1 0 2-.9 2-2z"/>
+        </svg>
+        <div class="dr-tag">DRESS CODE</div>
+        <h3 class="dr-title">White & Gold</h3>
+        <p class="dr-subtitle">Traditional Indian Attire Welcome</p>
+        <div class="dr-line"></div>
+        <div class="swatches">
+          <div class="swatch white"></div>
+          <div class="swatch gold"></div>
+          <div class="swatch cream"></div>
+        </div>
+        <p class="dr-hint">Please dress to impress 🌸</p>
+      </div>
+
+      <div class="dr-divider"></div>
+
+      <!-- RSVP -->
+      <div class="dr-col rsvp-col">
+        <svg class="dr-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <div class="dr-tag">RSVP</div>
+        <p class="dr-subtitle">Kindly respond by</p>
+        <h3 class="rsvp-date">1 February 2027</h3>
+        <div class="dr-line"></div>
+        
+        <div id="rsvp-form-container">
+          <form class="rsvp-form" id="wedding-rsvp-form">
+            <input type="text" class="rsvp-input" id="rsvp-name" placeholder="Your Name" required>
+            <input type="number" class="rsvp-input" id="rsvp-guests" placeholder="Number of Guests" min="1" required>
+            <div class="rsvp-btns">
+              <button type="button" class="rsvp-btn attending" id="btn-attending">ATTENDING ✓</button>
+              <button type="button" class="rsvp-btn unable" id="btn-unable">UNABLE TO ATTEND</button>
+            </div>
+            <button type="submit" class="rsvp-submit">Send RSVP</button>
+          </form>
+          <div class="rsvp-success" id="rsvp-success">
+            <svg class="success-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="25" cy="25" r="23" fill="none" stroke="#C9A96E" stroke-width="2"/>
+              <path d="M15 25 L22 32 L35 18" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="success-msg" id="success-name-msg">Thank you! 🌸</h3>
+            <p class="success-sub">We look forward to celebrating with you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 3 — CREATIVE CLOSING
+  ============================================ -->
+  <section id="closing" class="closing-section">
+    <div class="closing-bg-glow"></div>
+    <svg class="closing-mandala" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" fill="#C9A96E" opacity="1"/>
+    </svg>
+
+    <div class="closing-content">
+      <div class="closing-ornament-line"></div>
+      <div class="closing-tag">WITH LOVE</div>
+      <h2 class="closing-names">ARUN & PRIYA</h2>
+      <div class="closing-diamond">♦</div>
+      <div class="closing-date">14 · 02 · 2027</div>
+      <div class="closing-ornament-line" style="margin: 24px auto;"></div>
+      <p class="closing-quote">
+        We are overjoyed to share this moment<br>
+        with our most cherished family and friends.
+      </p>
+      
+      <svg class="closing-rings-svg" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="25" cy="20" r="15" fill="none" stroke="#C9A96E" stroke-width="1.5" class="ring-left"/>
+        <circle cx="55" cy="20" r="15" fill="none" stroke="#C9A96E" stroke-width="1.5" class="ring-right"/>
+      </svg>
+    </div>
+
+    <div class="closing-bottom-text">
+      The Grand Palace · Coimbatore · 14 February 2027
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+  ============================================ -->
+  <footer>
+    <svg class="footer-mandala" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 L55 45 L95 50 L55 55 L50 95 L45 55 L5 50 L45 45 Z" fill="#C9A96E"/>
+    </svg>
+    <div class="footer-names">ARUN & PRIYA · 2027</div>
+    <p class="footer-credit">Made with ❤️ for our special day</p>
+  </footer>
 
   <div id="om-lightbox">
     <div class="lightbox-close">×</div>
@@ -2054,12 +2633,134 @@
       });
     }
 
+    /* ==============================================
+       VENUE LOGIC
+    ============================================== */
+    function initVenue() {
+      gsap.fromTo(".venue-header", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#venue", start: "top 80%" } }
+      );
+      gsap.to(".venue-image-container", {
+        opacity: 1, scale: 1, duration: 1.2, ease: "power2.out",
+        scrollTrigger: { trigger: ".venue-image-container", start: "top 80%" }
+      });
+      
+      const etdSection = document.querySelector('.elegant-text-details');
+      const etdLines = etdSection.querySelectorAll('div, h3, p, svg');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(etdLines, 
+              { opacity: 0, y: 20 }, 
+              { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out" }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(etdSection);
+
+      gsap.fromTo(".map-frame-wrapper", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: ".google-maps-container", start: "top 85%" } }
+      );
+    }
+
+    /* ==============================================
+       DRESS CODE & RSVP LOGIC
+    ============================================== */
+    function initDressRSVP() {
+      const cols = document.querySelectorAll('.dr-col');
+      cols.forEach(col => {
+        gsap.to(col, {
+          opacity: 1, y: 0, duration: 1, ease: "power2.out",
+          scrollTrigger: { trigger: col, start: "top 85%" }
+        });
+      });
+
+      // RSVP Buttons
+      const btnAttending = document.getElementById('btn-attending');
+      const btnUnable = document.getElementById('btn-unable');
+      let attendance = null;
+
+      btnAttending.onclick = () => {
+        attendance = 'attending';
+        btnAttending.classList.add('active');
+        btnUnable.classList.remove('active');
+      };
+      btnUnable.onclick = () => {
+        attendance = 'unable';
+        btnUnable.classList.add('active');
+        btnAttending.classList.remove('active');
+      };
+
+      // Form Submit
+      const form = document.getElementById('wedding-rsvp-form');
+      const success = document.getElementById('rsvp-success');
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById('rsvp-name');
+        const name = nameInput.value.trim();
+        if (!name || !attendance) {
+          alert("Please enter your name and select your attendance status.");
+          return;
+        }
+        
+        gsap.to(form, { opacity: 0, y: -20, duration: 0.4, onComplete: () => {
+          form.style.display = 'none';
+          success.style.display = 'block';
+          document.getElementById('success-name-msg').innerText = `Thank you, ${name}! 🌸`;
+          gsap.fromTo(success, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 });
+          gsap.fromTo(".success-icon", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
+        }});
+      };
+    }
+
+    /* ==============================================
+       CLOSING LOGIC
+    ============================================== */
+    function initClosing() {
+      const section = document.getElementById('closing');
+      const content = section.querySelector('.closing-content');
+      const rings = content.querySelector('.closing-rings-svg');
+      const ringLeft = rings.querySelector('.ring-left');
+      const ringRight = rings.querySelector('.ring-right');
+
+      // Set dasharray for drawing effect
+      const len = 2 * Math.PI * 15;
+      gsap.set([ringLeft, ringRight], { strokeDasharray: len, strokeDashoffset: len });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const tl = gsap.timeline();
+            tl.to(content, { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+              .to([ringLeft, ringRight], { strokeDashoffset: 0, duration: 2, ease: "power1.inOut", stagger: 0.3 }, "-=0.5");
+            
+            // Staggered reveal for children
+            const children = Array.from(content.children).filter(el => el !== rings);
+            gsap.fromTo(children, 
+              { opacity: 0, y: 20 }, 
+              { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out", delay: 0.2 }
+            );
+
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(section);
+    }
+
     window.addEventListener('load', () => {
       initOpeningLogic();
       initProcession();
       initOurMoments();
       initDateReveal();
       initTimeline();
+      initVenue();
+      initDressRSVP();
+      initClosing();
     });
 
     // Re-init on resize to handle orientation changes
@@ -2072,6 +2773,9 @@
         initOurMoments();
         initDateReveal();
         initTimeline();
+        initVenue();
+        initDressRSVP();
+        initClosing();
       }, 500);
     };
 
