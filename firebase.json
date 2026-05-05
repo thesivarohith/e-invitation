@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "carde",
     "public": "./",
     "ignore": [
       "firebase.json",
