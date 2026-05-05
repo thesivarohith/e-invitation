@@ -9,7 +9,11 @@
       "git-log.txt",
       "README.md",
       ".git/**",
-      ".firebase/**"
+      ".firebase/**",
+      "candid likns/**",
+      "elinks.txt",
+      "bg-removed/**",
+      "download/**"
     ],
     "rewrites": [
       {
