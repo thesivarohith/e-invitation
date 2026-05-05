@@ -214,7 +214,7 @@
     .flower-img {
       position: absolute;
       pointer-events: none;
-      will-change: transform;
+      transform: translate3d(0,0,0);
     }
     .flower-layer-back {
       transform: translateZ(-120px) scale(1.15);
@@ -241,7 +241,7 @@
       z-index: 100;
       padding: 14px 0;
       background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -275,9 +275,6 @@
       justify-content: flex-end;
       opacity: 0;
       transform: scale(1.8);
-      filter: blur(8px);
-      will-change: transform, opacity, filter;
-      transform-style: preserve-3d;
     }
 
     .person-img {
@@ -391,7 +388,7 @@
       justify-content: center;
       opacity: 0;
       transform: scale(1.8);
-      filter: blur(8px);
+      opacity: 0;
       transform-style: preserve-3d;
     }
     .final-groom { position: absolute; left: 12%; bottom: 80px; height: 75vh; }
@@ -405,7 +402,7 @@
       text-align: center;
       background: rgba(250, 247, 242, 0.85);
       padding: 15px 30px;
-      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.85);
       z-index: 10;
       width: fit-content;
       opacity: 0;
@@ -505,7 +502,7 @@
       cursor: pointer;
       opacity: 0;
       transform: scale(0);
-      will-change: transform, opacity;
+      transform: translate3d(0,0,0);
       background: #FAF7F2;
     }
 
@@ -537,7 +534,7 @@
       z-index: 2;
       opacity: 0;
       transform: scale(0.6);
-      will-change: transform, opacity;
+      transform: translate3d(0,0,0);
       background: #FAF7F2;
     }
     .mobile-om-card img {
@@ -556,7 +553,7 @@
       overflow: hidden;
       opacity: 0;
       transform: scale(0.88);
-      filter: blur(2px);
+      opacity: 0;
       pointer-events: none;
       border: 4px solid rgba(255,255,255,0.5);
     }
@@ -1478,6 +1475,12 @@
       
       .closing-mandala { width: 180px; }
     }
+    
+    /* Header Background Optimization */
+    .sticky-timeline-header, .section-header {
+      background: rgba(250, 247, 242, 0.96) !important;
+      backdrop-filter: none !important;
+    }
   </style>
 </head>
 
@@ -1515,7 +1518,9 @@
       <!-- ALL PERSON FRAMES -->
       <!-- Groom Bro -->
       <div class="person-frame" id="frame-groom_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">RAHUL</div>
           <div class="person-label">Groom's Brother</div>
@@ -1524,7 +1529,9 @@
 
       <!-- Bride Bro -->
       <div class="person-frame" id="frame-bride_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">KARTHIK</div>
           <div class="person-label">Bride's Brother</div>
@@ -1533,7 +1540,9 @@
 
       <!-- Groom Sis -->
       <div class="person-frame" id="frame-groom_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">DIVYA</div>
           <div class="person-label">Groom's Sister</div>
@@ -1542,7 +1551,9 @@
 
       <!-- Bride Sis -->
       <div class="person-frame" id="frame-bride_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">MEENA</div>
           <div class="person-label">Bride's Sister</div>
@@ -1551,7 +1562,9 @@
 
       <!-- Groom Dad -->
       <div class="person-frame" id="frame-groom_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">MR. KUMAR</div>
           <div class="person-label">Groom's Father</div>
@@ -1560,7 +1573,9 @@
 
       <!-- Groom Mom -->
       <div class="person-frame" id="frame-groom_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">MRS. LAKSHMI</div>
           <div class="person-label">Groom's Mother</div>
@@ -1569,7 +1584,9 @@
 
       <!-- Bride Dad -->
       <div class="person-frame" id="frame-bride_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">MR. RAJA</div>
           <div class="person-label">Bride's Father</div>
@@ -1578,7 +1595,9 @@
 
       <!-- Bride Mom -->
       <div class="person-frame" id="frame-bride_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img" loading="lazy" decoding="async" />
         <div class="person-info">
           <div class="person-name">MRS. SUMATHI</div>
           <div class="person-label">Bride's Mother</div>
@@ -1587,8 +1606,12 @@
 
       <!-- Final Reveal -->
       <div class="final-frame" id="frame-final">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img final-groom" loading="lazy" decoding="async" />
+        <img data-src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" 
+             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="person-img final-bride" loading="lazy" decoding="async" />
         <div class="couple-text">
           <div class="couple-names">ARUN • PRIYA</div>
           <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
@@ -1939,7 +1962,15 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const isMobile = () => window.innerWidth < 769;
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: 'visibilitychange, DOMContentLoaded, load'
+    });
+
+    const isMobileDevice = window.innerWidth <= 768;
+    if (isMobileDevice) {
+      gsap.config({ force3D: false });
+    }
 
     /* ==============================================
        OPENING VIDEO & INTRO LOGIC
@@ -1948,6 +1979,14 @@
       const isMob = window.innerWidth < 769;
       const video = document.getElementById('opening-video');
       const tapPrompt = document.getElementById('tap-prompt');
+      
+      video.addEventListener('ended', function() {
+        setTimeout(function() {
+          video.src = '';
+          video.load();
+          video.style.display = 'none';
+        }, 4000);
+      });
       const openingText = document.getElementById('opening-text');
       const names = openingText.querySelector('.opening-names');
       const tagline = openingText.querySelector('.opening-tagline');
@@ -2009,62 +2048,56 @@
       return Math.random() * (max - min) + min;
     }
 
-    function injectFlowers(container, stepId) {
-      const isMob = window.innerWidth < 769;
-      
-      // Density adjustments based on step
-      let densityMult = 1;
-      if (stepId === 'final') densityMult = 1.3; // Most lush
+    const globalFlowerTweens = new Map();
 
-      const config = {
-        back: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 80, sizeMax: isMob ? 80 : 130, layer: 'flower-layer-back' },
-        mid: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 50 : 70, sizeMax: isMob ? 80 : 110, layer: 'flower-layer-mid' },
-        front: { count: Math.floor((isMob ? 8 : 16) * densityMult), sizeMin: isMob ? 65 : 100, sizeMax: isMob ? 90 : 150, layer: 'flower-layer-front' }
-      };
+    function injectFlowers(container, sectionId) {
+      const isMob = window.innerWidth <= 768;
+      const count = isMob ? 6 : 14;
+      const flowerTweens = [];
 
-      const placeFlower = (layerConfig, specificPos = null) => {
+      const placeFlower = (config) => {
         const img = document.createElement('img');
-        img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-        img.className = `flower-img ${layerConfig.layer}`;
+        const isGold = Math.random() > 0.7;
+        img.src = isGold 
+          ? "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_200/v1777800043/white_flower_lscxun.png"
+          : "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_200/v1777800042/gold_flower_uux02s.png";
         
-        const size = randomBetween(layerConfig.sizeMin, layerConfig.sizeMax);
-        img.style.width = `${size}px`;
-        img.style.height = 'auto';
-
-        const sw = window.innerWidth;
-        const sh = window.innerHeight;
-        let x, y, rot;
+        img.className = 'flower-decoration';
+        img.style.position = 'absolute';
+        img.style.width = `${config.size}px`;
+        img.style.opacity = config.opacity;
+        img.style.transform = `scale(${config.scale})`;
         
-        // All layers - strictly bound to the 4 edges (bushes effect)
-        const edgePos = Math.random();
-        const m = -size * 0.3; // Allow slight bleed off screen
-        
-        if (edgePos < 0.25) { // Top Edge
-          x = randomBetween(m, sw - size - m);
-          y = randomBetween(-size * 0.5, sh * 0.12);
-        } else if (edgePos < 0.5) { // Bottom Edge
-          x = randomBetween(m, sw - size - m);
-          y = randomBetween(sh * 0.88 - size, sh + size * 0.2);
-        } else if (edgePos < 0.75) { // Left Edge
-          x = randomBetween(-size * 0.6, sw * 0.12);
-          y = randomBetween(m, sh - size - m);
-        } else { // Right Edge
-          x = randomBetween(sw * 0.88 - size, sw + size * 0.2);
-          y = randomBetween(m, sh - size - m);
-        }
-        rot = randomBetween(-40, 40);
-
+        const sw = window.innerWidth, sh = window.innerHeight;
+        const x = Math.random() * sw, y = Math.random() * sh;
         img.style.left = `${x}px`;
         img.style.top = `${y}px`;
         container.appendChild(img);
 
-        // Set initial rotation only
-        gsap.set(img, { rotation: rot });
+        const tween = gsap.to(img, {
+          x: "+=20",
+          y: "+=20",
+          rotation: "+=15",
+          duration: 3 + Math.random() * 2,
+          repeat: -1,
+          yoyo: true,
+          paused: true,
+          ease: "sine.inOut"
+        });
+        flowerTweens.push(tween);
       };
 
-      for (let i = 0; i < config.back.count; i++) placeFlower(config.back);
-      for (let i = 0; i < config.mid.count; i++) placeFlower(config.mid);
-      for (let i = 0; i < config.front.count; i++) placeFlower(config.front);
+      const configs = {
+        back: { size: isMob ? 30 : 45, opacity: 0.4, scale: 0.75 },
+        mid: { size: isMob ? 45 : 65, opacity: 0.6, scale: 1 },
+        front: { size: isMob ? 60 : 85, opacity: 0.85, scale: 1.15 }
+      };
+
+      for (let i = 0; i < Math.ceil(count * 0.4); i++) placeFlower(configs.back);
+      for (let i = 0; i < Math.ceil(count * 0.3); i++) placeFlower(configs.mid);
+      for (let i = 0; i < Math.ceil(count * 0.3); i++) placeFlower(configs.front);
+
+      globalFlowerTweens.set(sectionId, flowerTweens);
     }
 
     /* ==============================================
@@ -2090,7 +2123,7 @@
           trigger: section,
           start: "top top",
           end: "+=8000",
-          scrub: 0.5,
+          scrub: 0.3,
           pin: true,
           anticipatePin: 1,
           snap: {
@@ -2098,6 +2131,13 @@
             duration: 0.4,
             delay: 0.1,
             ease: "power1.out"
+          },
+          onToggle: self => {
+            const tweens = globalFlowerTweens.get('family-procession');
+            if (tweens) {
+              if (self.isActive) tweens.forEach(t => t.play());
+              else tweens.forEach(t => t.pause());
+            }
           }
         }
       });
@@ -2117,13 +2157,19 @@
         
         // Entry
         tl.fromTo(el, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 10 },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          { autoAlpha: 0, scale: 1.8, zIndex: 10 },
+          { 
+            autoAlpha: 1, 
+            scale: 1, 
+            duration: 1, 
+            ease: "power2.out",
+            onStart: () => gsap.set(el, { willChange: 'transform, opacity' })
+          },
           p
         );
         tl.fromTo(fLayer, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 0 },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          { autoAlpha: 0, scale: 1.8, zIndex: 0 },
+          { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" },
           p
         );
         if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }, p + 0.6);
@@ -2133,8 +2179,14 @@
 
         // Exit
         const exitP = p + 3; // 1s enter + 2s hold
-        tl.to(el, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
-        tl.to(fLayer, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
+        tl.to(el, { 
+          scale: 0.4, 
+          autoAlpha: 0, 
+          duration: 1, 
+          ease: "power2.in",
+          onComplete: () => gsap.set(el, { willChange: 'auto' })
+        }, exitP);
+        tl.to(fLayer, { scale: 0.4, autoAlpha: 0, duration: 1, ease: "power2.in" }, exitP);
         if (infoEl) tl.to(infoEl, { autoAlpha: 0, duration: 0.4 }, exitP);
       };
 
@@ -2156,11 +2208,23 @@
         tl.addLabel('bros');
         addStep(broL, broL.querySelector('.person-info'), 'bros');
         tl.add(gsap.fromTo(broR, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+          { autoAlpha: 0, scale: 1.8 },
+          { 
+            autoAlpha: 1, 
+            scale: 1, 
+            duration: 1, 
+            ease: "power2.out",
+            onStart: () => gsap.set(broR, { willChange: 'transform, opacity' })
+          }
         ), 'bros');
         tl.add(gsap.fromTo(broR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'bros+=0.6');
-        tl.add(gsap.to(broR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'bros+=3.4');
+        tl.add(gsap.to(broR, { 
+          scale: 0.4, 
+          autoAlpha: 0, 
+          duration: 1, 
+          ease: "power2.in",
+          onComplete: () => gsap.set(broR, { willChange: 'auto' })
+        }), 'bros+=3.4');
         tl.add(gsap.to(broR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'bros+=3.4');
 
         // Desktop: Sisters
@@ -2171,11 +2235,23 @@
         tl.addLabel('sisters');
         addStep(sisL, sisL.querySelector('.person-info'), 'sisters');
         tl.add(gsap.fromTo(sisR, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+          { autoAlpha: 0, scale: 1.8 },
+          { 
+            autoAlpha: 1, 
+            scale: 1, 
+            duration: 1, 
+            ease: "power2.out",
+            onStart: () => gsap.set(sisR, { willChange: 'transform, opacity' })
+          }
         ), 'sisters');
         tl.add(gsap.fromTo(sisR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'sisters+=0.6');
-        tl.add(gsap.to(sisR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'sisters+=3.4');
+        tl.add(gsap.to(sisR, { 
+          scale: 0.4, 
+          autoAlpha: 0, 
+          duration: 1, 
+          ease: "power2.in",
+          onComplete: () => gsap.set(sisR, { willChange: 'auto' })
+        }), 'sisters+=3.4');
         tl.add(gsap.to(sisR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'sisters+=3.4');
 
         // Desktop: Groom's Parents
@@ -2242,12 +2318,12 @@
        OUR MOMENTS SECTION LOGIC
     ============================================== */
     const momentsData = [
-      { id: 0, label: "By The River", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947993/riverside_csq5oz.jpg" },
-      { id: 1, label: "Forest Path", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947982/forest_mlapox.jpg" },
-      { id: 2, label: "Rooftop Sunset", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947983/rooftop_xilknd.jpg" },
-      { id: 3, label: "Beach", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947976/beach_hyxonn.jpg" },
-      { id: 4, label: "Garden Arch", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947987/arch_e6fauu.jpg" },
-      { id: 5, label: "Cafe Street", src: "https://res.cloudinary.com/darbjeyc2/image/upload/v1777947989/cafe_yenzze.jpg" }
+      { id: 0, label: "By The River", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947993/riverside_csq5oz.jpg" },
+      { id: 1, label: "Forest Path", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947982/forest_mlapox.jpg" },
+      { id: 2, label: "Rooftop Sunset", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947983/rooftop_xilknd.jpg" },
+      { id: 3, label: "Beach", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947976/beach_hyxonn.jpg" },
+      { id: 4, label: "Garden Arch", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947987/arch_e6fauu.jpg" },
+      { id: 5, label: "Cafe Street", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_600/v1777947989/cafe_yenzze.jpg" }
     ];
 
     function initOurMoments() {
@@ -2585,7 +2661,7 @@
           trigger: ".timeline-container",
           start: "top center",
           end: "bottom center",
-          scrub: 0.8,
+          scrub: 0.3,
         }
       });
 
@@ -2801,6 +2877,32 @@
     }
 
     window.addEventListener('load', () => {
+      // Optimize Cloudinary URLs dynamically (Fix 3)
+      const cloudinaryParams = isMobileDevice 
+        ? 'f_auto,q_auto:good,w_380'
+        : 'f_auto,q_auto:good,w_600';
+      
+      document.querySelectorAll('.person-img').forEach(img => {
+        if (img.src && img.src.includes('cloudinary.com')) {
+          img.src = img.src.replace('/upload/', '/upload/' + cloudinaryParams + '/');
+        }
+      });
+
+      // Lazy Loading Observer (Fix 7)
+      const lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              lazyObserver.unobserve(img);
+            }
+          }
+        });
+      }, { rootMargin: '200px' });
+      document.querySelectorAll('.person-img[data-src]').forEach(img => lazyObserver.observe(img));
+
       initOpeningLogic();
       initProcession();
       initOurMoments();
