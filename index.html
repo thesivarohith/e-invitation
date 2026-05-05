@@ -850,13 +850,13 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 0;
       width: 14px;
       height: 14px;
       border-radius: 50%;
       background: #C9A96E;
       box-shadow: 0 0 0 4px rgba(201,169,110,0.25);
       z-index: 3;
+      will-change: top;
     }
 
     .timeline-event {
@@ -882,6 +882,8 @@
       transform: translateY(-50%) scale(0.85);
       width: 40vw;
       opacity: 0;
+      transform-origin: center center;
+      will-change: opacity, transform;
     }
     
     .event-content.left { right: calc(50% + 60px); text-align: right; }
@@ -1797,55 +1799,60 @@
 
       const header = section.querySelector('.tl-header');
       const dot = document.getElementById('tl-dot');
+      const line = section.querySelector('.timeline-line');
       const events = section.querySelectorAll('.timeline-event');
+      const contents = section.querySelectorAll('.event-content');
 
       gsap.fromTo(header, 
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: section, start: "top 75%" } }
       );
 
-      // 1. The Dot Scrubbing (Managed by GSAP)
-      gsap.to(dot, {
-        top: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1
+      const EVENT_THRESHOLDS = Array.from(events).map(ev => parseFloat(ev.style.top) / 100);
+      const revealed = new Array(contents.length).fill(false);
+      const HYSTERESIS = 0.03;
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        
+        onUpdate: function(self) {
+          const progress = self.progress;
+          
+          // 1. Move the dot explicitly relative to the line's pixel height
+          const maxTop = line.offsetHeight - dot.offsetHeight;
+          gsap.set(dot, { top: progress * maxTop });
+
+          // 2. Reveal or hide event texts
+          EVENT_THRESHOLDS.forEach((threshold, i) => {
+            const content = contents[i];
+            if (!content) return;
+
+            if (!revealed[i] && progress >= threshold) {
+              revealed[i] = true;
+              gsap.killTweensOf(content);
+              gsap.fromTo(content,
+                { opacity: 0, scale: 0.85 },
+                { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.4)' }
+              );
+              
+              const marker = content.closest('.timeline-event').querySelector('.event-marker');
+              if (marker) {
+                gsap.killTweensOf(marker);
+                gsap.fromTo(marker,
+                  { boxShadow: "0 0 0 0 rgba(201,169,110,0.8)" },
+                  { boxShadow: "0 0 0 10px rgba(201,169,110,0)", duration: 0.8 }
+                );
+              }
+            } else if (revealed[i] && progress < threshold - HYSTERESIS) {
+              revealed[i] = false;
+              gsap.killTweensOf(content);
+              gsap.to(content, { opacity: 0, scale: 0.85, duration: 0.25, ease: 'power2.in' });
+            }
+          });
         }
       });
-
-      // 2. The Event Popups (Managed by Native Scroll for absolute precision)
-      const eventData = Array.from(events).map(ev => {
-        return {
-          content: ev.querySelector('.event-content'),
-          marker: ev.querySelector('.event-marker'),
-          percent: parseFloat(ev.style.top) / 100,
-          fired: false
-        };
-      });
-
-      const handleTimelineScroll = () => {
-        const rect = section.getBoundingClientRect();
-        const maxScroll = rect.height - window.innerHeight;
-        // Progress is 0 when section top hits viewport top, and 1 when bottom hits bottom
-        const progress = -rect.top / maxScroll;
-        
-        eventData.forEach(ev => {
-          if (progress >= ev.percent && !ev.fired) {
-            ev.fired = true;
-            gsap.fromTo(ev.content, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)", overwrite: "auto" });
-            gsap.fromTo(ev.marker, { boxShadow: "0 0 0 0 rgba(201,169,110,0.8)" }, { boxShadow: "0 0 0 10px rgba(201,169,110,0)", duration: 0.8, overwrite: "auto" });
-          } else if (progress < ev.percent && ev.fired) {
-            ev.fired = false;
-            gsap.fromTo(ev.content, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.85, duration: 0.4, ease: "power2.in", overwrite: "auto" });
-          }
-        });
-      };
-
-      window.addEventListener('scroll', handleTimelineScroll, { passive: true });
-      handleTimelineScroll(); // Initial check
     }
 
     window.addEventListener('load', () => {
@@ -1858,7 +1865,7 @@
 
     // Re-init on resize to handle orientation changes
     let rt;
-    window.addEventListener('resize', () => {
+    const handleGlobalResize = () => {
       clearTimeout(rt);
       rt = setTimeout(() => {
         ScrollTrigger.getAll().forEach(t => t.kill());
@@ -1867,7 +1874,15 @@
         initDateReveal();
         initTimeline();
       }, 500);
-    });
+    };
+
+    window.addEventListener('resize', handleGlobalResize);
+    
+    // Crucial for iOS Safari where address bar hiding changes visual viewport 
+    // but doesn't immediately fire window.resize
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleGlobalResize);
+    }
   </script>
 </body>
 </html>
