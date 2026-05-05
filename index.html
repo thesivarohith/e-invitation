@@ -59,6 +59,8 @@
       height: 100vh;
       pointer-events: none;
       z-index: 0;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .gold-dots-container {
@@ -195,6 +197,8 @@
       width: 100%;
       background: transparent;
       z-index: 1;
+      contain: layout style;
+      isolation: isolate;
     }
 
     .fp-sticky-container {
@@ -204,6 +208,8 @@
       height: 100vh;
       overflow: hidden;
       perspective: 800px;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .flower-img {
@@ -269,9 +275,8 @@
       align-items: center;
       justify-content: flex-end;
       opacity: 0;
-      transform: scale(1.8);
-      filter: blur(8px);
-      will-change: transform, opacity, filter;
+      transform: scale(1.8) translateZ(200px);
+      will-change: transform, opacity;
       transform-style: preserve-3d;
     }
 
@@ -285,6 +290,12 @@
       filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
       z-index: 2;
       position: relative;
+      will-change: transform, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      perspective: 1000px;
+      -webkit-perspective: 1000px;
     }
 
     .person-info {
@@ -1084,7 +1095,7 @@
       <!-- ALL PERSON FRAMES -->
       <!-- Groom Bro -->
       <div class="person-frame" id="frame-groom_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">RAHUL</div>
           <div class="person-label">Groom's Brother</div>
@@ -1093,7 +1104,7 @@
 
       <!-- Bride Bro -->
       <div class="person-frame" id="frame-bride_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">KARTHIK</div>
           <div class="person-label">Bride's Brother</div>
@@ -1102,7 +1113,7 @@
 
       <!-- Groom Sis -->
       <div class="person-frame" id="frame-groom_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">DIVYA</div>
           <div class="person-label">Groom's Sister</div>
@@ -1111,7 +1122,7 @@
 
       <!-- Bride Sis -->
       <div class="person-frame" id="frame-bride_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">MEENA</div>
           <div class="person-label">Bride's Sister</div>
@@ -1120,7 +1131,7 @@
 
       <!-- Groom Dad -->
       <div class="person-frame" id="frame-groom_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">MR. KUMAR</div>
           <div class="person-label">Groom's Father</div>
@@ -1129,7 +1140,7 @@
 
       <!-- Groom Mom -->
       <div class="person-frame" id="frame-groom_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">MRS. LAKSHMI</div>
           <div class="person-label">Groom's Mother</div>
@@ -1138,7 +1149,7 @@
 
       <!-- Bride Dad -->
       <div class="person-frame" id="frame-bride_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">MR. RAJA</div>
           <div class="person-label">Bride's Father</div>
@@ -1147,7 +1158,7 @@
 
       <!-- Bride Mom -->
       <div class="person-frame" id="frame-bride_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" loading="eager" decoding="sync" />
         <div class="person-info">
           <div class="person-name">MRS. SUMATHI</div>
           <div class="person-label">Bride's Mother</div>
@@ -1156,8 +1167,8 @@
 
       <!-- Final Reveal -->
       <div class="final-frame" id="frame-final">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" loading="eager" decoding="sync" />
         <div class="couple-text">
           <div class="couple-names">ARUN • PRIYA</div>
           <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
@@ -1343,6 +1354,11 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    gsap.config({
+      force3D: true,
+      nullTargetWarn: false,
+    });
+
     const isMobile = () => window.innerWidth < 769;
 
     /* ==============================================
@@ -1494,9 +1510,11 @@
           trigger: section,
           start: "top top",
           end: "+=8000", // Fixed long scroll for cinematic slow feel
-          scrub: 1,
+          scrub: 0.6,
           pin: true,
-          anticipatePin: 1
+          anticipatePin: 1,
+          fastScrollEnd: true,
+          preventOverlaps: true
         }
       });
 
@@ -1515,25 +1533,25 @@
         
         // Entry
         tl.fromTo(el, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 10 },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          { autoAlpha: 0, scale: 1.6, z: 200, zIndex: 10, force3D: true, lazy: false },
+          { autoAlpha: 1, scale: 1, z: 0, duration: 1, ease: "power2.out", force3D: true, lazy: false },
           p
         );
         tl.fromTo(fLayer, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)", zIndex: 0 },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
+          { autoAlpha: 0, scale: 1.6, z: 200, zIndex: 0, force3D: true, lazy: false },
+          { autoAlpha: 1, scale: 1, z: 0, duration: 1, ease: "power2.out", force3D: true, lazy: false },
           p
         );
-        if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }, p + 0.6);
+        if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30, force3D: true, lazy: false }, { autoAlpha: 1, y: 0, duration: 0.4, force3D: true, lazy: false }, p + 0.6);
         
         // Hold
         tl.to(el, { duration: 2 }); // Extends timeline by 2s
 
         // Exit
         const exitP = p + 3; // 1s enter + 2s hold
-        tl.to(el, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
-        tl.to(fLayer, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }, exitP);
-        if (infoEl) tl.to(infoEl, { autoAlpha: 0, duration: 0.4 }, exitP);
+        tl.to(el, { scale: 0.5, autoAlpha: 0, z: -200, duration: 1, ease: "power2.in", force3D: true, lazy: false }, exitP);
+        tl.to(fLayer, { scale: 0.5, autoAlpha: 0, z: -200, duration: 1, ease: "power2.in", force3D: true, lazy: false }, exitP);
+        if (infoEl) tl.to(infoEl, { autoAlpha: 0, duration: 0.4, force3D: true, lazy: false }, exitP);
       };
 
       if (isMob) {
@@ -1554,12 +1572,12 @@
         tl.addLabel('bros');
         addStep(broL, broL.querySelector('.person-info'), 'bros');
         tl.add(gsap.fromTo(broR, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+          { autoAlpha: 0, scale: 1.6, z: 200, force3D: true, lazy: false },
+          { autoAlpha: 1, scale: 1, z: 0, duration: 1, ease: "power2.out", force3D: true, lazy: false }
         ), 'bros');
-        tl.add(gsap.fromTo(broR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'bros+=0.6');
-        tl.add(gsap.to(broR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'bros+=3.4');
-        tl.add(gsap.to(broR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'bros+=3.4');
+        tl.add(gsap.fromTo(broR.querySelector('.person-info'), { autoAlpha: 0, y: 30, force3D: true, lazy: false }, { autoAlpha: 1, y: 0, duration: 0.4, force3D: true, lazy: false }), 'bros+=0.6');
+        tl.add(gsap.to(broR, { scale: 0.5, autoAlpha: 0, z: -200, duration: 1, ease: "power2.in", force3D: true, lazy: false }), 'bros+=3.4');
+        tl.add(gsap.to(broR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4, force3D: true, lazy: false }), 'bros+=3.4');
 
         // Desktop: Sisters
         const sisL = document.getElementById('frame-groom_sis');
@@ -1569,12 +1587,12 @@
         tl.addLabel('sisters');
         addStep(sisL, sisL.querySelector('.person-info'), 'sisters');
         tl.add(gsap.fromTo(sisR, 
-          { autoAlpha: 0, scale: 1.8, filter: "blur(10px)" },
-          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }
+          { autoAlpha: 0, scale: 1.6, z: 200, force3D: true, lazy: false },
+          { autoAlpha: 1, scale: 1, z: 0, duration: 1, ease: "power2.out", force3D: true, lazy: false }
         ), 'sisters');
-        tl.add(gsap.fromTo(sisR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'sisters+=0.6');
-        tl.add(gsap.to(sisR, { scale: 0.4, autoAlpha: 0, filter: "blur(4px)", duration: 1, ease: "power2.in" }), 'sisters+=3.4');
-        tl.add(gsap.to(sisR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'sisters+=3.4');
+        tl.add(gsap.fromTo(sisR.querySelector('.person-info'), { autoAlpha: 0, y: 30, force3D: true, lazy: false }, { autoAlpha: 1, y: 0, duration: 0.4, force3D: true, lazy: false }), 'sisters+=0.6');
+        tl.add(gsap.to(sisR, { scale: 0.5, autoAlpha: 0, z: -200, duration: 1, ease: "power2.in", force3D: true, lazy: false }), 'sisters+=3.4');
+        tl.add(gsap.to(sisR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4, force3D: true, lazy: false }), 'sisters+=3.4');
 
         // Desktop: Groom's Parents
         const gParents = document.createElement('div');
@@ -2054,25 +2072,20 @@
       initTimeline();
     });
 
-    // Re-init on resize to handle orientation changes
     let rt;
     const handleGlobalResize = () => {
       clearTimeout(rt);
       rt = setTimeout(() => {
-        ScrollTrigger.getAll().forEach(t => t.kill());
-        initProcession();
-        initOurMoments();
-        initDateReveal();
-        initTimeline();
-      }, 500);
+        ScrollTrigger.refresh();
+      }, 250);
     };
 
-    window.addEventListener('resize', handleGlobalResize);
+    window.addEventListener('resize', handleGlobalResize, { passive: true });
     
     // Crucial for iOS Safari where address bar hiding changes visual viewport 
     // but doesn't immediately fire window.resize
     if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleGlobalResize);
+      window.visualViewport.addEventListener('resize', handleGlobalResize, { passive: true });
     }
   </script>
 </body>
