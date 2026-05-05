@@ -2090,14 +2090,14 @@
           trigger: section,
           start: "top top",
           end: "+=8000",
-          scrub: 1,
+          scrub: 0.5,
           pin: true,
           anticipatePin: 1,
           snap: {
             snapTo: "labels",
-            duration: { min: 0.4, max: 0.8 },
-            delay: 0,
-            ease: "power2.inOut"
+            duration: 0.4,
+            delay: 0.1,
+            ease: "power1.out"
           }
         }
       });
