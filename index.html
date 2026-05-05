@@ -37,7 +37,7 @@
     body {
       width: 100%;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
       background: #FAF7F2;
       font-family: 'Cormorant Garamond', serif;
     }
@@ -1584,30 +1584,41 @@
         if (oldStep >= 0 && oldStep < totalSteps) {
           const oldEl = personElements[oldStep];
           const oldName = nameElements[oldStep];
-          const targets = [oldEl];
-          if (oldName) targets.push(oldName);
+          const targets = [];
+          if (Array.isArray(oldEl)) targets.push(...oldEl); else if (oldEl) targets.push(oldEl);
+          if (Array.isArray(oldName)) targets.push(...oldName); else if (oldName) targets.push(oldName);
           
-          gsap.to(targets, {
-            scale: 0.5,
-            opacity: 0,
-            duration: 0.35,
-            ease: "power2.in",
-            force3D: true,
-            overwrite: true
-          });
+          if (targets.length) {
+            gsap.to(targets, {
+              scale: 0.5,
+              opacity: 0,
+              duration: 0.35,
+              ease: "power2.in",
+              force3D: true,
+              overwrite: true
+            });
+          }
         }
         
         setTimeout(() => {
           const newEl = personElements[newStep];
           const newName = nameElements[newStep];
           
-          gsap.fromTo(newEl,
-            { scale: 1.5, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", force3D: true, overwrite: true }
-          );
+          const newElTargets = [];
+          if (Array.isArray(newEl)) newElTargets.push(...newEl); else if (newEl) newElTargets.push(newEl);
           
-          if (newName) {
-            gsap.fromTo(newName,
+          if (newElTargets.length) {
+            gsap.fromTo(newElTargets,
+              { scale: 1.5, opacity: 0 },
+              { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", force3D: true, overwrite: true }
+            );
+          }
+          
+          const newNameTargets = [];
+          if (Array.isArray(newName)) newNameTargets.push(...newName); else if (newName) newNameTargets.push(newName);
+          
+          if (newNameTargets.length) {
+            gsap.fromTo(newNameTargets,
               { opacity: 0, y: 20 },
               { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", delay: 0.25, overwrite: true }
             );
