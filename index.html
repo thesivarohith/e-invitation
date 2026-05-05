@@ -197,8 +197,6 @@
       width: 100%;
       background: transparent;
       z-index: 1;
-      contain: layout style;
-      isolation: isolate;
     }
 
     .fp-sticky-container {
@@ -208,10 +206,6 @@
       height: 100vh;
       overflow: hidden;
       perspective: 1000px;
-      -webkit-perspective: 1000px;
-      transform: translate3d(0,0,0);
-      -webkit-transform: translate3d(0,0,0);
-      will-change: transform;
     }
 
     .flower-img {
@@ -1513,7 +1507,7 @@
         order.forEach(id => {
           const frame = document.getElementById('frame-' + id);
           if (frame) {
-            personElements.push(frame);
+            personElements.push(Array.from(frame.querySelectorAll('.person-img')));
             nameElements.push(frame.querySelector(id === 'final' ? '.couple-text' : '.person-info'));
           }
         });
@@ -1521,13 +1515,13 @@
         const broL = document.getElementById('frame-groom_bro');
         const broR = document.getElementById('frame-bride_bro');
         broL.classList.add('desktop-left'); broR.classList.add('desktop-right');
-        personElements.push([broL, broR]);
+        personElements.push([broL.querySelector('.person-img'), broR.querySelector('.person-img')]);
         nameElements.push([broL.querySelector('.person-info'), broR.querySelector('.person-info')]);
 
         const sisL = document.getElementById('frame-groom_sis');
         const sisR = document.getElementById('frame-bride_sis');
         sisL.classList.add('desktop-left'); sisR.classList.add('desktop-right');
-        personElements.push([sisL, sisR]);
+        personElements.push([sisL.querySelector('.person-img'), sisR.querySelector('.person-img')]);
         nameElements.push([sisL.querySelector('.person-info'), sisR.querySelector('.person-info')]);
 
         const gParents = document.createElement('div');
@@ -1535,31 +1529,31 @@
         gParents.style.justifyContent = 'center';
         gParents.innerHTML = `
           <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" style="position:relative; opacity:1; transform:none;" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" style="position:relative; opacity:1; transform:none;" />
-            <div class="parents-column-label person-info" style="position:relative; opacity:1; transform:none;">GROOM'S PARENTS</div>
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
+            <div class="parents-column-label person-info">GROOM'S PARENTS</div>
           </div>
         `;
         sticky.appendChild(gParents);
-        personElements.push(gParents);
-        nameElements.push(null);
+        personElements.push(Array.from(gParents.querySelectorAll('.person-img')));
+        nameElements.push(gParents.querySelector('.person-info'));
 
         const bParents = document.createElement('div');
         bParents.className = 'parents-desktop-grid person-frame';
         bParents.style.justifyContent = 'center';
         bParents.innerHTML = `
           <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" style="position:relative; opacity:1; transform:none;" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" style="position:relative; opacity:1; transform:none;" />
-            <div class="parents-column-label person-info" style="position:relative; opacity:1; transform:none;">BRIDE'S PARENTS</div>
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
+            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
+            <div class="parents-column-label person-info">BRIDE'S PARENTS</div>
           </div>
         `;
         sticky.appendChild(bParents);
-        personElements.push(bParents);
-        nameElements.push(null);
+        personElements.push(Array.from(bParents.querySelectorAll('.person-img')));
+        nameElements.push(bParents.querySelector('.person-info'));
 
         const final = document.getElementById('frame-final');
-        personElements.push(final);
+        personElements.push(Array.from(final.querySelectorAll('.person-img')));
         nameElements.push(final.querySelector('.couple-text'));
       }
 
