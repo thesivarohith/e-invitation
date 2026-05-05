@@ -254,15 +254,19 @@
       opacity: 0.6;
     }
     .fp-header h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.5rem, 1.8vw, 0.75rem);
-      letter-spacing: clamp(0.2em, 0.6vw, 0.4em);
-      color: #C9A96E;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .procession-title-wrapper {
+        position: absolute;
+        top: 10vh;
+        text-align: center;
+        z-index: 100;
+    }
+    .procession-header-tag { font-family: 'Montserrat'; letter-spacing: 0.3em; color: #C9A96E; }
+    .procession-viewport { position: relative; width: 100%; height: 100%; }
 
-    /* Person Elements */
     .person-frame {
       position: absolute;
       top: 0;
@@ -272,86 +276,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      opacity: 0;
-      transform: scale(1.8);
-      filter: blur(8px);
+      justify-content: center;
       will-change: transform, opacity;
-      transform-style: preserve-3d;
-      image-rendering: -webkit-optimize-contrast;
     }
-
     .person-img {
-      height: 72vh;
+      height: 60vh;
       width: auto;
-      max-width: 92vw;
       object-fit: contain;
-      object-position: bottom center;
-      margin-bottom: 80px;
       filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
-      z-index: 2;
-      position: relative;
     }
-
     .person-info {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
       text-align: center;
-      opacity: 0;
-      z-index: 3;
+      margin-top: 20px;
     }
-    .person-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: clamp(1.3rem, 5.5vw, 1.8rem);
-      color: #C9A96E;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-    .person-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.5rem, 1.9vw, 0.68rem);
-      letter-spacing: 0.25em;
-      color: #777777;
-      text-transform: uppercase;
-      margin-top: 6px;
-      display: block;
-    }
+    .person-name { font-family: 'Cormorant Garamond'; font-size: 2.2rem; color: #C9A96E; }
+    .person-role { font-family: 'Montserrat'; font-size: 0.7rem; letter-spacing: 0.2em; color: #888; }
+    .person-side { font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.9rem; color: #999; }
 
-    /* Desktop Specifics */
+    /* ==============================================
+       Desktop Specifics
+    ============================================== */
     @media (min-width: 769px) {
-      .fp-header .line { width: 60px; }
-      
-      .desktop-pair {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: none; /* Controlled by JS */
-      }
-      
-      .person-frame.desktop-left { left: 12%; width: 35%; align-items: center; }
-      .person-frame.desktop-right { left: auto; right: 12%; width: 35%; align-items: center; }
-      
-      .person-img { height: 75vh; margin-bottom: 90px; }
-      
-      .person-info { bottom: 25px; }
-      .person-name { font-size: 1.8rem; }
-      
-      /* Parents Desktop Pair */
-      .parents-desktop-grid {
-        position: absolute;
-        width: 80% !important;
-        left: 10%;
-        height: 75vh !important;
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between;
-        align-items: flex-end;
-        bottom: 80px;
-        transform-style: preserve-3d;
-      }
       .parents-column {
         width: 45%;
         display: flex;
@@ -1506,95 +1451,12 @@
   </section>
 
   <section id="family-procession">
-    <div class="fp-sticky-container">
-      <div class="fp-header">
-        <div class="line"></div>
-        <h2>WITH THE BLESSINGS OF</h2>
-        <div class="line"></div>
+    <div class="procession-sticky">
+      <div class="procession-title-wrapper" id="procession-header">
+        <div class="procession-header-tag">THE FAMILY</div>
+        <div class="procession-header-main">Our Loved Ones</div>
       </div>
-
-      <!-- ALL PERSON FRAMES -->
-      <!-- Groom Bro -->
-      <div class="person-frame" id="frame-groom_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786916/groom_bro_arvmqr.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">RAHUL</div>
-          <div class="person-label">Groom's Brother</div>
-        </div>
-      </div>
-
-      <!-- Bride Bro -->
-      <div class="person-frame" id="frame-bride_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786913/bride_bro_isqh4j.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">KARTHIK</div>
-          <div class="person-label">Bride's Brother</div>
-        </div>
-      </div>
-
-      <!-- Groom Sis -->
-      <div class="person-frame" id="frame-groom_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786920/groom_sis_trypz4.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">DIVYA</div>
-          <div class="person-label">Groom's Sister</div>
-        </div>
-      </div>
-
-      <!-- Bride Sis -->
-      <div class="person-frame" id="frame-bride_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786915/bride_sis_untzs6.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">MEENA</div>
-          <div class="person-label">Bride's Sister</div>
-        </div>
-      </div>
-
-      <!-- Groom Dad -->
-      <div class="person-frame" id="frame-groom_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786918/groom_dad_xqz41v.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">MR. KUMAR</div>
-          <div class="person-label">Groom's Father</div>
-        </div>
-      </div>
-
-      <!-- Groom Mom -->
-      <div class="person-frame" id="frame-groom_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">MRS. LAKSHMI</div>
-          <div class="person-label">Groom's Mother</div>
-        </div>
-      </div>
-
-      <!-- Bride Dad -->
-      <div class="person-frame" id="frame-bride_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786912/bride_dad_c25ney.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">MR. RAJA</div>
-          <div class="person-label">Bride's Father</div>
-        </div>
-      </div>
-
-      <!-- Bride Mom -->
-      <div class="person-frame" id="frame-bride_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786916/bride_mom_pzij5t.png" class="person-img" />
-        <div class="person-info">
-          <div class="person-name">MRS. SUMATHI</div>
-          <div class="person-label">Bride's Mother</div>
-        </div>
-      </div>
-
-      <!-- Final Reveal -->
-      <div class="final-frame" id="frame-final">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
-        <div class="couple-text">
-          <div class="couple-names">ARUN • PRIYA</div>
-          <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
-        </div>
-      </div>
+      <div class="procession-viewport" id="procession-sticky-content"></div>
     </div>
   </section>
 
@@ -2077,171 +1939,68 @@
        FAMILY PROCESSION — Z-AXIS MASTER TIMELINE
     ============================================== */
     function initProcession() {
-      const isMob = isMobile();
       const section = document.getElementById('family-procession');
-      const sticky = section.querySelector('.fp-sticky-container');
+      const sticky = document.getElementById('procession-sticky-content');
+      const header = document.getElementById('procession-header');
+      if (!section || !sticky) return;
+
+      sticky.innerHTML = '';
       
-      // Cleanup previous triggers
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === section) t.kill();
-      });
-
-      // Clear dynamic parents if any
-      const existingParents = document.getElementById('frame-parents-desktop');
-      if (existingParents) existingParents.remove();
-
-      // Master Timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=4500",
-          scrub: 0.1,
-          pin: true,
-          anticipatePin: 1,
-          snap: {
-            snapTo: "labels",
-            duration: 0.3,
-            delay: 0,
-            ease: "power1.out"
-          }
-        }
-      });
-
-      const addStep = (el, infoEl, stepId) => {
-        if (!el) return;
-        
-        // Generate a full-screen, dedicated flower layer for this step
-        const fLayer = document.createElement('div');
-        fLayer.className = 'person-frame flower-3d-wrapper';
-        fLayer.style.zIndex = 0; // Ensures it's behind the people (z-index 2)
-        sticky.appendChild(fLayer);
-        injectFlowers(fLayer, stepId);
-
-        // Calculate absolute position to perfectly sync all elements
-        const p = tl.recent() ? tl.recent().endTime() : 0;
-        
-        // Entry
-        tl.fromTo(el, 
-          { autoAlpha: 0, scale: 1.8, zIndex: 10 },
-          { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" },
-          p
-        );
-        tl.fromTo(fLayer, 
-          { autoAlpha: 0, scale: 1.8, zIndex: 0 },
-          { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" },
-          p
-        );
-        if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }, p + 0.6);
-        
-        // Hold
-        tl.to(el, { duration: 2 }); // Extends timeline by 2s
-
-        // Exit
-        const exitP = p + 3; // 1s enter + 2s hold
-        tl.to(el, { scale: 0.4, autoAlpha: 0, duration: 1, ease: "power2.in" }, exitP);
-        tl.to(fLayer, { scale: 0.4, autoAlpha: 0, duration: 1, ease: "power2.in" }, exitP);
-        if (infoEl) tl.to(infoEl, { autoAlpha: 0, duration: 0.4 }, exitP);
+      const createFrame = (name, role, side, imgUrl) => {
+        const frame = document.createElement('div');
+        frame.className = 'person-frame';
+        frame.innerHTML = `
+          <img src="${imgUrl}" class="person-img" />
+          <div class="person-info">
+            <div class="person-name">${name}</div>
+            <div class="person-role">${role}</div>
+            <div class="person-side">${side}</div>
+          </div>
+        `;
+        sticky.appendChild(frame);
+        return frame;
       };
 
-      if (isMob) {
-        const order = ['groom_bro', 'bride_bro', 'groom_sis', 'bride_sis', 'groom_dad', 'groom_mom', 'bride_dad', 'bride_mom', 'final'];
-        order.forEach(id => {
-          const frame = document.getElementById('frame-' + id);
-          if (frame) {
-            const info = id === 'final' ? frame.querySelector('.couple-text') : frame.querySelector('.person-info');
-            addStep(frame, info, id);
-          }
-        });
-      } else {
-        // Desktop: Bros
-        const broL = document.getElementById('frame-groom_bro');
-        const broR = document.getElementById('frame-bride_bro');
-        broL.classList.add('desktop-left'); broR.classList.add('desktop-right');
-        
-        tl.addLabel('bros');
-        addStep(broL, broL.querySelector('.person-info'), 'bros');
-        tl.add(gsap.fromTo(broR, 
-          { autoAlpha: 0, scale: 1.8 },
-          { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" }
-        ), 'bros');
-        tl.add(gsap.fromTo(broR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'bros+=0.6');
-        tl.add(gsap.to(broR, { scale: 0.4, autoAlpha: 0, duration: 1, ease: "power2.in" }), 'bros+=3.4');
-        tl.add(gsap.to(broR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'bros+=3.4');
+      const frames = [
+        { el: createFrame("Rahul", "Brother", "Groom's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786916/groom_bro_arvmqr.png"), start: 0.1, end: 0.3 },
+        { el: createFrame("Sneha", "Sister", "Bride's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786915/bride_sis_untzs6.png"), start: 0.3, end: 0.5 },
+        { el: createFrame("Groom's Parents", "Parents", "Groom's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786918/groom_dad_xqz41v.png"), start: 0.5, end: 0.7 },
+        { el: createFrame("Bride's Parents", "Parents", "Bride's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786912/bride_dad_c25ney.png"), start: 0.7, end: 0.9 },
+        { el: createFrame("Arun & Priya", "The Couple", "Together Forever", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786909/bride_qc5i3y.png"), start: 0.9, end: 1.0 }
+      ];
 
-        // Desktop: Sisters
-        const sisL = document.getElementById('frame-groom_sis');
-        const sisR = document.getElementById('frame-bride_sis');
-        sisL.classList.add('desktop-left'); sisR.classList.add('desktop-right');
-        
-        tl.addLabel('sisters');
-        addStep(sisL, sisL.querySelector('.person-info'), 'sisters');
-        tl.add(gsap.fromTo(sisR, 
-          { autoAlpha: 0, scale: 1.8 },
-          { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" }
-        ), 'sisters');
-        tl.add(gsap.fromTo(sisR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4 }), 'sisters+=0.6');
-        tl.add(gsap.to(sisR, { scale: 0.4, autoAlpha: 0, duration: 1, ease: "power2.in" }), 'sisters+=3.4');
-        tl.add(gsap.to(sisR.querySelector('.person-info'), { autoAlpha: 0, duration: 0.4 }), 'sisters+=3.4');
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.1,
+        onUpdate: (self) => {
+          const p = self.progress;
+          
+          // Header fade
+          gsap.set(header, { opacity: p < 0.05 ? 1 : Math.max(0, 1 - (p * 10)) });
 
-        // Desktop: Groom's Parents
-        const gParents = document.createElement('div');
-        gParents.className = 'parents-desktop-grid';
-        gParents.style.justifyContent = 'center';
-        gParents.innerHTML = `
-          <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786918/groom_dad_xqz41v.png" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786919/groom_mom_kvq4lr.png" />
-            <div class="parents-column-label">GROOM'S PARENTS</div>
-          </div>
-        `;
-        sticky.appendChild(gParents);
-        tl.addLabel('gParents');
-        addStep(gParents, null, 'gParents');
-
-        // Desktop: Bride's Parents
-        const bParents = document.createElement('div');
-        bParents.className = 'parents-desktop-grid';
-        bParents.style.justifyContent = 'center';
-        bParents.innerHTML = `
-          <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786912/bride_dad_c25ney.png" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786916/bride_mom_pzij5t.png" />
-            <div class="parents-column-label">BRIDE'S PARENTS</div>
-          </div>
-        `;
-        sticky.appendChild(bParents);
-        tl.addLabel('bParents');
-        addStep(bParents, null, 'bParents');
-
-        // Desktop: Final
-        const final = document.getElementById('frame-final');
-        tl.addLabel('final');
-        addStep(final, final.querySelector('.couple-text'), 'final');
-      }
-
-      // Global Parallax 3D Effect (Continuous Oscillation of the entire scene)
-      // Setting the pivot point back to Z = -120px holds the back flowers perfectly still (top of cone)
-      // We ONLY target .flower-3d-wrapper so the people do NOT oscillate at all!
-      gsap.set('.flower-3d-wrapper', {
-        transformOrigin: "50% 50% -120px"
+          frames.forEach((frame) => {
+            let opacity = 0;
+            let scale = 1.8;
+            
+            if (p >= frame.start && p <= frame.end) {
+              const range = frame.end - frame.start;
+              const localP = (p - frame.start) / range;
+              
+              // Bell curve for opacity
+              opacity = Math.sin(localP * Math.PI);
+              scale = 1.8 - (localP * 1.4); // 1.8 down to 0.4
+            }
+            
+            gsap.set(frame.el, { 
+              opacity: opacity, 
+              scale: scale,
+              display: opacity > 0.01 ? 'flex' : 'none' 
+            });
+          });
+        }
       });
-      gsap.to('.flower-3d-wrapper', {
-        rotationX: 3.5,
-        duration: 3.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1
-      });
-      gsap.to('.flower-3d-wrapper', {
-        rotationY: 4.5,
-        duration: 4.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1
-      });
-
-      ScrollTrigger.refresh();
     }
 
     /* ==============================================
