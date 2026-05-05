@@ -276,8 +276,9 @@
       opacity: 0;
       transform: scale(1.8);
       filter: blur(8px);
-      will-change: transform, opacity, filter;
+      will-change: transform, opacity;
       transform-style: preserve-3d;
+      image-rendering: -webkit-optimize-contrast;
     }
 
     .person-img {
@@ -1939,6 +1940,9 @@
 
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
+    if (window.innerWidth < 769) {
+      ScrollTrigger.normalizeScroll(true);
+    }
 
     const isMobile = () => window.innerWidth < 769;
 
@@ -2012,6 +2016,7 @@
 
     function injectFlowers(container, stepId) {
       const isMob = window.innerWidth < 769;
+      if (isMob) return; // Radical performance: NO flowers on mobile
       
       // Density adjustments based on step
       let densityMult = 1;
