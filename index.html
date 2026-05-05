@@ -19,6 +19,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+
   <link rel="preload" as="video" href="https://res.cloudinary.com/darbjeyc2/video/upload/v1777868423/openenvelope_aa9vca.mp4" />
 
   <style>
@@ -1916,6 +1921,22 @@
   </div>
 
   <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUYKN62-pSwAv6FTqLzlDepg1sLzvxzQo",
+      authDomain: "chat1-263fb.firebaseapp.com",
+      projectId: "chat1-263fb",
+      storageBucket: "chat1-263fb.firebasestorage.app",
+      messagingSenderId: "272558417680",
+      appId: "1:272558417680:web:a2bc63c40d264c9c4ea795",
+      measurementId: "G-HP5X6WGZPN"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const analytics = firebase.analytics();
+
     gsap.registerPlugin(ScrollTrigger);
 
     const isMobile = () => window.innerWidth < 769;
@@ -2698,22 +2719,43 @@
       // Form Submit
       const form = document.getElementById('wedding-rsvp-form');
       const success = document.getElementById('rsvp-success');
-      form.onsubmit = (e) => {
+      form.onsubmit = async (e) => {
         e.preventDefault();
         const nameInput = document.getElementById('rsvp-name');
+        const guestsInput = document.getElementById('rsvp-guests');
         const name = nameInput.value.trim();
+        const guests = guestsInput.value;
+
         if (!name || !attendance) {
           alert("Please enter your name and select your attendance status.");
           return;
         }
-        
-        gsap.to(form, { opacity: 0, y: -20, duration: 0.4, onComplete: () => {
-          form.style.display = 'none';
-          success.style.display = 'block';
-          document.getElementById('success-name-msg').innerText = `Thank you, ${name}! 🌸`;
-          gsap.fromTo(success, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 });
-          gsap.fromTo(".success-icon", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
-        }});
+
+        const submitBtn = form.querySelector('.rsvp-submit');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "SENDING...";
+
+        try {
+          await db.collection("rsvps").add({
+            name: name,
+            guests: guests,
+            attendance: attendance,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+          gsap.to(form, { opacity: 0, y: -20, duration: 0.4, onComplete: () => {
+            form.style.display = 'none';
+            success.style.display = 'block';
+            document.getElementById('success-name-msg').innerText = `Thank you, ${name}! 🌸`;
+            gsap.fromTo(success, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 });
+            gsap.fromTo(".success-icon", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
+          }});
+        } catch (error) {
+          console.error("Error saving RSVP:", error);
+          alert("Something went wrong. Please try again.");
+          submitBtn.disabled = false;
+          submitBtn.innerText = "SEND RSVP";
+        }
       };
     }
 

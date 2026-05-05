@@ -1,0 +1,6 @@
+riverside  -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947993/riverside_csq5oz.jpg
+forest     -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947982/forest_mlapox.jpg
+rooftop    -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947983/rooftop_xilknd.jpg
+beach      -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947976/beach_hyxonn.jpg
+arch       -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947987/arch_e6fauu.jpg
+cafe       -  https://res.cloudinary.com/darbjeyc2/image/upload/v1777947989/cafe_yenzze.jpg
