@@ -13,7 +13,9 @@
       "candid likns/**",
       "elinks.txt",
       "bg-removed/**",
-      "download/**"
+      "download/**",
+      "candid/**",
+      "venue.jpeg"
     ],
     "rewrites": [
       {
