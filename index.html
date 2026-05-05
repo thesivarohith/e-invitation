@@ -814,151 +814,238 @@
       z-index: 10;
     }
 
-    .tl-header {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-      letter-spacing: 0.4em;
-      color: #C9A96E;
-      text-transform: uppercase;
-      opacity: 0;
+    .timeline-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    
+    .tl-mandala {
+      width: 40px;
+      opacity: 0.6;
+      margin-bottom: 16px;
     }
 
-    .timeline-line {
+    .tl-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+      letter-spacing: 0.35em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .tl-line {
+      width: 80px;
+      height: 1px;
+      background: #C9A96E;
+      opacity: 0.4;
+      margin-bottom: 12px;
+    }
+
+    .tl-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: #999999;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+      margin-bottom: 80px;
+      position: relative;
+      min-height: 200px;
+    }
+
+    .timeline-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .timeline-container::before {
+      content: '';
       position: absolute;
-      left: 50%;
+      left: calc(50% - 0.75px);
       top: 0;
       bottom: 0;
       width: 1.5px;
       background: linear-gradient(
         to bottom,
-        transparent,
+        transparent 0%,
         #C9A96E 5%,
         #C9A96E 95%,
-        transparent
+        transparent 100%
       );
-      transform: translateX(-50%);
-      z-index: 1;
+      z-index: 0;
     }
 
     .timeline-dot {
       position: absolute;
-      left: 50%;
+      left: calc(50% - 6px);
       top: 0;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
+      width: 12px;
+      height: 12px;
       background: #C9A96E;
-      box-shadow: 0 0 0 4px rgba(201,169,110,0.25);
-      z-index: 3;
+      border-radius: 50%;
+      border: 2px solid #FAF7F2;
+      box-shadow: 0 0 0 4px rgba(201,169,110,0.2);
+      z-index: 5;
     }
 
-    .timeline-item {
+    .left-area { 
+      display: flex; 
+      justify-content: flex-end;
+      padding-right: 24px;
+    }
+    
+    .right-area { 
+      display: flex; 
+      justify-content: flex-start;
+      padding-left: 24px;
+    }
+
+    .timeline-center {
+      position: relative;
+      height: 100%;
       display: flex;
       align-items: center;
-      margin-bottom: 100px;
-      position: relative;
-      width: 100%;
-    }
-
-    .timeline-item.left {
-      justify-content: flex-start;
-      padding-right: calc(50% + 30px);
-    }
-
-    .timeline-item.right {
-      justify-content: flex-end;
-      padding-left: calc(50% + 30px);
+      justify-content: center;
     }
 
     .timeline-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(201,169,110,0.4);
-      border-radius: 16px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 24px rgba(180,150,100,0.12);
-      width: 280px;
-      max-width: 40vw;
+      width: 100%;
+      max-width: 380px;
+      min-height: 180px;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FDFAF5 60%, #FAF6EC 100%);
+      border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(180,150,100,0.10), 0 1px 4px rgba(180,150,100,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative;
       opacity: 0;
       z-index: 4;
     }
 
-    .timeline-item.left .timeline-card { transform: translateX(-60px); text-align: right; }
-    .timeline-item.right .timeline-card { transform: translateX(60px); text-align: left; }
+    .card-ornament {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      opacity: 0.4;
+    }
+
+    .event-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(201,169,110,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .right-card .event-icon { margin-left: 0; }
+    .left-card .event-icon { margin-left: auto; }
+
+    .left-card { text-align: right; }
+    .right-card { text-align: left; }
+
+    .card-accent-line {
+      width: 40px;
+      height: 1.5px;
+      background: #C9A96E;
+      opacity: 0.5;
+      margin-top: 14px;
+    }
+    .left-card .card-accent-line { margin-left: auto; }
+    .right-card .card-accent-line { margin-left: 0; }
+
+    .event-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 1.6vw, 0.72rem);
+      letter-spacing: 0.25em;
+      color: #C9A96E;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .event-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      color: #2C2C2C;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .event-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      color: #999999;
+      line-height: 1.5;
+    }
 
     .timeline-diamond {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%) rotate(45deg);
-      width: 10px;
-      height: 10px;
-      background: #C9A96E;
-      border: 2px solid #FAF7F2;
+      width: 12px;
+      height: 12px;
+      background: #FAF7F2;
+      border: 2px solid #C9A96E;
       z-index: 2;
     }
 
-    .timeline-connector {
+    .timeline-connector-left {
       position: absolute;
       top: 50%;
+      right: 50%;
       height: 1px;
-      background: rgba(201,169,110,0.4);
-      width: 30px;
-    }
-    
-    .timeline-item.left .timeline-connector { right: calc(50% - 30px); }
-    .timeline-item.right .timeline-connector { left: calc(50% - 30px); }
-
-    .event-icon {
-      font-size: 1.4rem;
-      display: block;
-      margin-bottom: 8px;
+      background: linear-gradient(to left, #C9A96E, transparent);
+      width: calc(50% + 24px);
+      opacity: 0.4;
+      transform: translateY(-50%);
     }
 
-    .event-time {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.55rem, 1.8vw, 0.7rem);
-      letter-spacing: 0.2em;
-      color: #C9A96E;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .event-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2vw, 1.3rem);
-      font-weight: 600;
-      color: #333333;
-      letter-spacing: 0.05em;
-      margin: 0 0 6px 0;
-    }
-
-    .event-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(0.75rem, 2.2vw, 0.9rem);
-      color: #888888;
-      margin: 0;
+    .timeline-connector-right {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 1px;
+      background: linear-gradient(to right, #C9A96E, transparent);
+      width: calc(50% + 24px);
+      opacity: 0.4;
+      transform: translateY(-50%);
     }
 
     @media (max-width: 768px) {
-      .timeline-card {
-        width: 42vw;
-        max-width: 42vw;
-        padding: 12px 14px;
+      .timeline-row {
+        grid-template-columns: 1fr 40px 1fr;
+        margin-bottom: 50px;
+        min-height: 130px;
       }
-      .timeline-item.left { padding-right: calc(50% + 16px); }
-      .timeline-item.right { padding-left: calc(50% + 16px); }
-      .timeline-item.left .timeline-card { transform: translateX(-30px); }
-      .timeline-item.right .timeline-card { transform: translateX(30px); }
-      
-      .timeline-connector { width: 16px; }
-      .timeline-item.left .timeline-connector { right: calc(50% - 16px); }
-      .timeline-item.right .timeline-connector { left: calc(50% - 16px); }
+      .left-area { padding-right: 10px; }
+      .right-area { padding-left: 10px; }
+      .timeline-card {
+        padding: 20px 18px;
+        min-height: 120px;
+      }
+      .event-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      .timeline-connector-left, .timeline-connector-right {
+        width: calc(50% + 10px);
+      }
     }
   </style>
 </head>
@@ -1141,52 +1228,108 @@
        CELEBRATION TIMELINE
   ============================================== -->
   <section id="celebration-timeline" class="timeline-section">
-    <div class="tl-header">OUR CELEBRATION</div>
+    <div class="timeline-header">
+      <svg class="tl-mandala" viewBox="0 0 100 100" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 15 C60 15, 65 30, 50 45 C35 30, 40 15, 50 15 Z" fill="rgba(201,169,110,0.1)"/>
+        <path d="M50 85 C60 85, 65 70, 50 55 C35 70, 40 85, 50 85 Z" fill="rgba(201,169,110,0.1)"/>
+        <path d="M15 50 C15 60, 30 65, 45 50 C30 35, 15 40, 15 50 Z" fill="rgba(201,169,110,0.1)"/>
+        <path d="M85 50 C85 60, 70 65, 55 50 C70 35, 85 40, 85 50 Z" fill="rgba(201,169,110,0.1)"/>
+        <circle cx="50" cy="50" r="8" fill="#C9A96E"/>
+      </svg>
+      <div class="tl-title">OUR CELEBRATION</div>
+      <div class="tl-line"></div>
+      <div class="tl-date">Saturday · 14 February 2027</div>
+    </div>
     
-    <div class="timeline-line"></div>
-    <div class="timeline-dot" id="tl-dot"></div>
+    <div class="timeline-container">
+      <div class="timeline-dot" id="tl-dot"></div>
       
-    <div class="timeline-item left">
-      <div class="timeline-diamond"></div>
-      <div class="timeline-connector"></div>
-      <div class="timeline-card">
-        <span class="event-icon">🌸</span>
-        <span class="event-time">8:00 AM</span>
-        <h3 class="event-name">NALANGU</h3>
-        <p class="event-desc">Fun pre-wedding ceremony</p>
+      <!-- Event 1 -->
+      <div class="timeline-row left">
+        <div class="timeline-card-area left-area">
+          <div class="timeline-card left-card">
+            <svg class="card-ornament" viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#C9A96E" stroke-width="1.5">
+              <path d="M0 20 Q 20 20, 20 0" />
+              <path d="M10 20 Q 20 20, 20 10" />
+            </svg>
+            <div class="event-icon">🌸</div>
+            <div class="event-time">8:00 AM</div>
+            <div class="event-name">NALANGU</div>
+            <div class="event-desc">Fun pre-wedding ceremony</div>
+            <div class="card-accent-line"></div>
+          </div>
+        </div>
+        <div class="timeline-center">
+          <div class="timeline-diamond"></div>
+          <div class="timeline-connector-left"></div>
+        </div>
+        <div class="timeline-card-area right-area"></div>
       </div>
-    </div>
 
-    <div class="timeline-item right">
-      <div class="timeline-diamond"></div>
-      <div class="timeline-connector"></div>
-      <div class="timeline-card">
-        <span class="event-icon">💍</span>
-        <span class="event-time">11:00 AM</span>
-        <h3 class="event-name">MUHURTHAM</h3>
-        <p class="event-desc">Main wedding ceremony</p>
+      <!-- Event 2 -->
+      <div class="timeline-row right">
+        <div class="timeline-card-area left-area"></div>
+        <div class="timeline-center">
+          <div class="timeline-diamond"></div>
+          <div class="timeline-connector-right"></div>
+        </div>
+        <div class="timeline-card-area right-area">
+          <div class="timeline-card right-card">
+            <svg class="card-ornament" viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#C9A96E" stroke-width="1.5">
+              <path d="M0 20 Q 20 20, 20 0" />
+              <path d="M10 20 Q 20 20, 20 10" />
+            </svg>
+            <div class="event-icon">💍</div>
+            <div class="event-time">11:00 AM</div>
+            <div class="event-name">MUHURTHAM</div>
+            <div class="event-desc">Main wedding ceremony</div>
+            <div class="card-accent-line"></div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="timeline-item left">
-      <div class="timeline-diamond"></div>
-      <div class="timeline-connector"></div>
-      <div class="timeline-card">
-        <span class="event-icon">🍽️</span>
-        <span class="event-time">1:00 PM</span>
-        <h3 class="event-name">WEDDING LUNCH</h3>
-        <p class="event-desc">Feast and celebrations</p>
+      <!-- Event 3 -->
+      <div class="timeline-row left">
+        <div class="timeline-card-area left-area">
+          <div class="timeline-card left-card">
+            <svg class="card-ornament" viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#C9A96E" stroke-width="1.5">
+              <path d="M0 20 Q 20 20, 20 0" />
+              <path d="M10 20 Q 20 20, 20 10" />
+            </svg>
+            <div class="event-icon">🍽️</div>
+            <div class="event-time">1:00 PM</div>
+            <div class="event-name">WEDDING LUNCH</div>
+            <div class="event-desc">Feast and celebrations</div>
+            <div class="card-accent-line"></div>
+          </div>
+        </div>
+        <div class="timeline-center">
+          <div class="timeline-diamond"></div>
+          <div class="timeline-connector-left"></div>
+        </div>
+        <div class="timeline-card-area right-area"></div>
       </div>
-    </div>
 
-    <div class="timeline-item right">
-      <div class="timeline-diamond"></div>
-      <div class="timeline-connector"></div>
-      <div class="timeline-card">
-        <span class="event-icon">✨</span>
-        <span class="event-time">7:00 PM</span>
-        <h3 class="event-name">RECEPTION</h3>
-        <p class="event-desc">Evening celebration</p>
+      <!-- Event 4 -->
+      <div class="timeline-row right">
+        <div class="timeline-card-area left-area"></div>
+        <div class="timeline-center">
+          <div class="timeline-diamond"></div>
+          <div class="timeline-connector-right"></div>
+        </div>
+        <div class="timeline-card-area right-area">
+          <div class="timeline-card right-card">
+            <svg class="card-ornament" viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#C9A96E" stroke-width="1.5">
+              <path d="M0 20 Q 20 20, 20 0" />
+              <path d="M10 20 Q 20 20, 20 10" />
+            </svg>
+            <div class="event-icon">✨</div>
+            <div class="event-time">7:00 PM</div>
+            <div class="event-name">RECEPTION</div>
+            <div class="event-desc">Evening celebration</div>
+            <div class="card-accent-line"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1832,7 +1975,7 @@
        CELEBRATION TIMELINE LOGIC
     ============================================== */
     function initTimeline() {
-      const header = document.querySelector('.tl-header');
+      const header = document.querySelector('.timeline-header');
       if (header) {
         gsap.fromTo(header, 
           { opacity: 0, y: 20 },
@@ -1841,32 +1984,66 @@
       }
 
       gsap.to(".timeline-dot", {
-        top: "95%",
+        top: "calc(100% - 12px)",
         ease: "none",
         scrollTrigger: {
-          trigger: "#celebration-timeline",
+          trigger: ".timeline-container",
           start: "top center",
           end: "bottom center",
-          scrub: 0.6,
+          scrub: 0.8,
         }
       });
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const card = entry.target;
-            gsap.to(card, {
-              opacity: 1,
-              x: 0,
-              duration: 0.7,
-              ease: "power2.out"
-            });
-            observer.unobserve(card);
+            const row = entry.target;
+            const card = row.querySelector('.timeline-card');
+            const connectorLeft = row.querySelector('.timeline-connector-left');
+            const connectorRight = row.querySelector('.timeline-connector-right');
+            const diamond = row.querySelector('.timeline-diamond');
+
+            if (card && card.classList.contains('left-card')) {
+              gsap.fromTo(card,
+                { opacity: 0, x: -50, scale: 0.96 },
+                { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+              );
+            } else if (card) {
+              gsap.fromTo(card,
+                { opacity: 0, x: 50, scale: 0.96 },
+                { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+              );
+            }
+
+            if (connectorLeft) {
+              gsap.fromTo(connectorLeft, { width: 0 }, { width: "calc(50% + 24px)", duration: 0.6, delay: 0.2, ease: "power2.out" });
+            }
+            if (connectorRight) {
+              gsap.fromTo(connectorRight, { width: 0 }, { width: "calc(50% + 24px)", duration: 0.6, delay: 0.2, ease: "power2.out" });
+            }
+
+            if (diamond) {
+              gsap.to(diamond, { backgroundColor: "#C9A96E", duration: 0.5, delay: 0.4 });
+              gsap.fromTo(diamond, { scale: 1 }, { scale: 1.4, duration: 0.25, yoyo: true, repeat: 1, ease: "back.out", delay: 0.4 });
+            }
+
+            if (card) {
+              gsap.to(card, {
+                boxShadow: "0 8px 40px rgba(201,169,110,0.25)",
+                duration: 0.5,
+                yoyo: true,
+                repeat: 1,
+                delay: 0.6,
+                ease: "power1.inOut"
+              });
+            }
+            
+            observer.unobserve(row);
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.3 });
       
-      document.querySelectorAll('.timeline-card').forEach(card => observer.observe(card));
+      document.querySelectorAll('.timeline-row').forEach(row => observer.observe(row));
     }
 
     window.addEventListener('load', () => {
