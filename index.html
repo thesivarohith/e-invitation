@@ -254,19 +254,15 @@
       opacity: 0.6;
     }
     .fp-header h2 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.5rem, 1.8vw, 0.75rem);
+      letter-spacing: clamp(0.2em, 0.6vw, 0.4em);
+      color: #C9A96E;
+      text-transform: uppercase;
     }
-    .procession-title-wrapper {
-        position: absolute;
-        top: 10vh;
-        text-align: center;
-        z-index: 100;
-    }
-    .procession-header-tag { font-family: 'Montserrat'; letter-spacing: 0.3em; color: #C9A96E; }
-    .procession-viewport { position: relative; width: 100%; height: 100%; }
 
+    /* Person Elements */
     .person-frame {
       position: absolute;
       top: 0;
@@ -276,27 +272,86 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
+      opacity: 0;
+      transform: scale(1.8);
+      filter: blur(8px);
       will-change: transform, opacity;
+      transform-style: preserve-3d;
+      image-rendering: -webkit-optimize-contrast;
     }
-    .person-img {
-      height: 60vh;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
-    }
-    .person-info {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .person-name { font-family: 'Cormorant Garamond'; font-size: 2.2rem; color: #C9A96E; }
-    .person-role { font-family: 'Montserrat'; font-size: 0.7rem; letter-spacing: 0.2em; color: #888; }
-    .person-side { font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.9rem; color: #999; }
 
-    /* ==============================================
-       Desktop Specifics
-    ============================================== */
+    .person-img {
+      height: 72vh;
+      width: auto;
+      max-width: 92vw;
+      object-fit: contain;
+      object-position: bottom center;
+      margin-bottom: 80px;
+      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
+      z-index: 2;
+      position: relative;
+    }
+
+    .person-info {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      z-index: 3;
+    }
+    .person-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+      color: #C9A96E;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .person-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.5rem, 1.9vw, 0.68rem);
+      letter-spacing: 0.25em;
+      color: #777777;
+      text-transform: uppercase;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* Desktop Specifics */
     @media (min-width: 769px) {
+      .fp-header .line { width: 60px; }
+      
+      .desktop-pair {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none; /* Controlled by JS */
+      }
+      
+      .person-frame.desktop-left { left: 12%; width: 35%; align-items: center; }
+      .person-frame.desktop-right { left: auto; right: 12%; width: 35%; align-items: center; }
+      
+      .person-img { height: 75vh; margin-bottom: 90px; }
+      
+      .person-info { bottom: 25px; }
+      .person-name { font-size: 1.8rem; }
+      
+      /* Parents Desktop Pair */
+      .parents-desktop-grid {
+        position: absolute;
+        width: 80% !important;
+        left: 10%;
+        height: 75vh !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: flex-end;
+        bottom: 80px;
+        transform-style: preserve-3d;
+      }
       .parents-column {
         width: 45%;
         display: flex;
@@ -1451,12 +1506,24 @@
   </section>
 
   <section id="family-procession">
-    <div class="procession-sticky">
-      <div class="procession-title-wrapper" id="procession-header">
-        <div class="procession-header-tag">THE FAMILY</div>
-        <div class="procession-header-main">Our Loved Ones</div>
+    <div class="fp-sticky-container">
+      <div class="fp-header">
+        <div class="line"></div>
+        <h2>WITH THE BLESSINGS OF</h2>
+        <div class="line"></div>
       </div>
-      <div class="procession-viewport" id="procession-sticky-content"></div>
+
+      <!-- Final Reveal -->
+
+      <!-- Final Reveal -->
+      <div class="final-frame" id="frame-final">
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
+        <div class="couple-text">
+          <div class="couple-names">ARUN • PRIYA</div>
+          <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1635,7 +1702,7 @@
     </div>
 
     <div class="venue-image-container">
-      <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777970651/venue_xmugh6.jpg" alt="The Grand Palace" class="venue-img">
+      <img src="https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777970651/venue_xmugh6.jpg" alt="The Grand Palace" class="venue-img">
       <div class="venue-overlay"></div>
       <div class="venue-text-overlay">
         <h2 class="venue-name-big">THE GRAND PALACE</h2>
@@ -1868,8 +1935,8 @@
        3D FLOWER DECORATION SYSTEM
     ============================================== */
     const flowerImages = [
-      'https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777909270/Neat_Flower_01_zkluet.png',
-      'https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777909273/Neat_Flower_02_opbtyi.png'
+      'https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777909270/Neat_Flower_01_zkluet.png',
+      'https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777909273/Neat_Flower_02_opbtyi.png'
     ];
 
     function randomBetween(min, max) {
@@ -1939,78 +2006,52 @@
        FAMILY PROCESSION — Z-AXIS MASTER TIMELINE
     ============================================== */
     function initProcession() {
+      const isMob = isMobile();
       const section = document.getElementById('family-procession');
-      const sticky = document.getElementById('procession-sticky-content');
-      const header = document.getElementById('procession-header');
-      if (!section || !sticky) return;
-
-      sticky.innerHTML = '';
+      const sticky = section.querySelector('.fp-sticky-container');
       
-      const createFrame = (name, role, side, imgUrl) => {
-        const frame = document.createElement('div');
-        frame.className = 'person-frame';
-        frame.innerHTML = `
-          <img src="${imgUrl}" class="person-img" />
-          <div class="person-info">
-            <div class="person-name">${name}</div>
-            <div class="person-role">${role}</div>
-            <div class="person-side">${side}</div>
-          </div>
-        `;
-        sticky.appendChild(frame);
-        return frame;
-      };
+      // Cleanup previous triggers
+      ScrollTrigger.getAll().forEach(t => {
+        if (t.trigger === section) t.kill();
+      });
 
-      const frames = [
-        { el: createFrame("Arun", "The Groom", "Groom's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786915/Groom_v8sy6l.png"), start: 0.1, end: 0.4 },
-        { el: createFrame("Priya", "The Bride", "Bride's Side", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786909/bride_qc5i3y.png"), start: 0.4, end: 0.7 },
-        { el: createFrame("Arun & Priya", "The Couple", "Together Forever", "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777786909/bride_qc5i3y.png"), start: 0.7, end: 1.0 }
-      ];
+      // Clear dynamic parents if any
+      const existingParents = document.getElementById('frame-parents-desktop');
+      if (existingParents) existingParents.remove();
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.1,
-        onUpdate: (self) => {
-          const p = self.progress;
-          
-          // Header fade
-          gsap.set(header, { opacity: p < 0.05 ? 1 : Math.max(0, 1 - (p * 10)) });
-
-          frames.forEach((frame) => {
-            let opacity = 0;
-            let scale = 1.8;
-            
-            if (p >= frame.start && p <= frame.end) {
-              const range = frame.end - frame.start;
-              const localP = (p - frame.start) / range;
-              
-              // Bell curve for opacity
-              opacity = Math.sin(localP * Math.PI);
-              scale = 1.8 - (localP * 1.4); // 1.8 down to 0.4
-            }
-            
-            gsap.set(frame.el, { 
-              opacity: opacity, 
-              scale: scale,
-              display: opacity > 0.01 ? 'flex' : 'none' 
-            });
-          });
+      // Master Timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=2000",
+          scrub: 0.1,
+          pin: true,
+          anticipatePin: 1
         }
       });
+
+      // FINAL REVEAL (Groom & Bride)
+      const final = document.getElementById('frame-final');
+      tl.addLabel('final');
+      tl.fromTo(final, 
+        { autoAlpha: 0, scale: 1.8 },
+        { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" }, 
+        'final'
+      );
+      ScrollTrigger.refresh();
     }
 
     /* ==============================================
        OUR MOMENTS SECTION LOGIC
     ============================================== */
     const momentsData = [
-      { id: 0, label: "By The River", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947993/riverside_csq5oz.jpg" },
-      { id: 1, label: "Forest Path", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947982/forest_mlapox.jpg" },
-      { id: 2, label: "Rooftop Sunset", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947983/rooftop_xilknd.jpg" },
-      { id: 3, label: "Beach", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947976/beach_hyxonn.jpg" },
-      { id: 4, label: "Garden Arch", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947987/arch_e6fauu.jpg" },
-      { id: 5, label: "Cafe Street", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_500/v1777947989/cafe_yenzze.jpg" }
+      { id: 0, label: "By The River", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947993/riverside_csq5oz.jpg" },
+      { id: 1, label: "Forest Path", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947982/forest_mlapox.jpg" },
+      { id: 2, label: "Rooftop Sunset", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947983/rooftop_xilknd.jpg" },
+      { id: 3, label: "Beach", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947976/beach_hyxonn.jpg" },
+      { id: 4, label: "Garden Arch", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947987/arch_e6fauu.jpg" },
+      { id: 5, label: "Cafe Street", src: "https://res.cloudinary.com/darbjeyc2/image/upload/f_auto,q_auto:good,w_1200/v1777947989/cafe_yenzze.jpg" }
     ];
 
     function initOurMoments() {
