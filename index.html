@@ -809,17 +809,9 @@
     #celebration-timeline {
       position: relative;
       width: 100%;
-      height: 500vh;
+      padding: 60px 0 100px;
       background: transparent;
       z-index: 10;
-    }
-
-    .timeline-sticky {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
     }
 
     .tl-header {
@@ -838,17 +830,24 @@
     .timeline-line {
       position: absolute;
       left: 50%;
-      top: 80px;
-      bottom: 40px;
+      top: 0;
+      bottom: 0;
       width: 1.5px;
-      background: linear-gradient(to bottom, transparent 0%, #C9A96E 8%, #C9A96E 92%, transparent 100%);
-      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        #C9A96E 5%,
+        #C9A96E 95%,
+        transparent
+      );
       transform: translateX(-50%);
+      z-index: 1;
     }
 
     .timeline-dot {
       position: absolute;
       left: 50%;
+      top: 0;
       transform: translateX(-50%);
       width: 14px;
       height: 14px;
@@ -856,19 +855,45 @@
       background: #C9A96E;
       box-shadow: 0 0 0 4px rgba(201,169,110,0.25);
       z-index: 3;
-      will-change: top;
     }
 
-    .timeline-event {
-      position: absolute;
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 100px;
+      position: relative;
       width: 100%;
-      left: 0;
     }
 
-    .event-diamond {
+    .timeline-item.left {
+      justify-content: flex-start;
+      padding-right: calc(50% + 30px);
+    }
+
+    .timeline-item.right {
+      justify-content: flex-end;
+      padding-left: calc(50% + 30px);
+    }
+
+    .timeline-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 24px rgba(180,150,100,0.12);
+      width: 280px;
+      max-width: 40vw;
+      opacity: 0;
+      z-index: 4;
+    }
+
+    .timeline-item.left .timeline-card { transform: translateX(-60px); text-align: right; }
+    .timeline-item.right .timeline-card { transform: translateX(60px); text-align: left; }
+
+    .timeline-diamond {
       position: absolute;
       left: 50%;
-      top: 0;
+      top: 50%;
       transform: translate(-50%, -50%) rotate(45deg);
       width: 10px;
       height: 10px;
@@ -877,84 +902,63 @@
       z-index: 2;
     }
 
-    .event-connector {
+    .timeline-connector {
       position: absolute;
-      top: 0;
+      top: 50%;
       height: 1px;
       background: rgba(201,169,110,0.4);
-      width: 40px;
-      z-index: 1;
-    }
-    .event-connector.right { left: 50%; }
-    .event-connector.left { right: 50%; }
-
-    .event-content {
-      position: absolute;
-      top: 0;
-      transform: translateY(-50%);
-      width: 42%;
-      background: #FFFFFF;
-      border: 1px solid rgba(201,169,110,0.4);
-      border-radius: 16px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 24px rgba(180,150,100,0.12);
-      opacity: 0;
-      transform-origin: center center;
-      will-change: opacity, transform;
+      width: 30px;
     }
     
-    .event-content.left { right: calc(50% + 40px); text-align: right; }
-    .event-content.right { left: calc(50% + 40px); text-align: left; }
+    .timeline-item.left .timeline-connector { right: calc(50% - 30px); }
+    .timeline-item.right .timeline-connector { left: calc(50% - 30px); }
 
     .event-icon {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       display: block;
+      margin-bottom: 8px;
     }
 
     .event-time {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.6rem, 2vw, 0.75rem);
+      font-size: clamp(0.55rem, 1.8vw, 0.7rem);
       letter-spacing: 0.2em;
       color: #C9A96E;
-      margin-top: 8px;
+      display: block;
+      margin-bottom: 4px;
     }
 
     .event-name {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: bold;
-      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      font-size: clamp(1rem, 3.2vw, 1.3rem);
+      font-weight: 600;
       color: #333333;
       letter-spacing: 0.05em;
-      margin-top: 4px;
-      line-height: 1.1;
+      margin: 0 0 6px 0;
     }
 
     .event-desc {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+      font-size: clamp(0.75rem, 2.2vw, 0.9rem);
       color: #888888;
-      margin-top: 6px;
+      margin: 0;
     }
 
     @media (max-width: 768px) {
-      .timeline-line { left: 20%; transform: translateX(-50%); }
-      .timeline-dot { left: 20%; transform: translateX(-50%); width: 12px; height: 12px; box-shadow: 0 0 0 3px rgba(201,169,110,0.25); }
-      .event-diamond { left: 20%; width: 10px; height: 10px; }
-      
-      .event-connector.left, .event-connector.right {
-        left: 20%;
-        right: auto;
-        width: 5vw;
+      .timeline-card {
+        width: 42vw;
+        max-width: 42vw;
+        padding: 12px 14px;
       }
+      .timeline-item.left { padding-right: calc(50% + 16px); }
+      .timeline-item.right { padding-left: calc(50% + 16px); }
+      .timeline-item.left .timeline-card { transform: translateX(-30px); }
+      .timeline-item.right .timeline-card { transform: translateX(30px); }
       
-      .event-content.left, .event-content.right {
-        left: 25% !important;
-        right: auto !important;
-        width: 70vw !important;
-        text-align: left !important;
-        padding: 14px 16px !important;
-      }
+      .timeline-connector { width: 16px; }
+      .timeline-item.left .timeline-connector { right: calc(50% - 16px); }
+      .timeline-item.right .timeline-connector { left: calc(50% - 16px); }
     }
   </style>
 </head>
@@ -1136,59 +1140,53 @@
   <!-- ==============================================
        CELEBRATION TIMELINE
   ============================================== -->
-  <section id="celebration-timeline">
-    <div class="timeline-sticky">
-      <div class="tl-header">OUR CELEBRATION</div>
+  <section id="celebration-timeline" class="timeline-section">
+    <div class="tl-header">OUR CELEBRATION</div>
+    
+    <div class="timeline-line"></div>
+    <div class="timeline-dot" id="tl-dot"></div>
       
-      <div class="timeline-line"></div>
-      <div class="timeline-dot" id="tl-dot"></div>
-
-      <!-- Event 1 -->
-      <div class="timeline-event" style="top: 10%;">
-        <div class="event-diamond"></div>
-        <div class="event-connector right"></div>
-        <div class="event-content right">
-          <span class="event-icon">🌸</span>
-          <div class="event-time">8:00 AM</div>
-          <div class="event-name">Nalangu</div>
-          <div class="event-desc">Fun pre-wedding ceremony</div>
-        </div>
+    <div class="timeline-item left">
+      <div class="timeline-diamond"></div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-card">
+        <span class="event-icon">🌸</span>
+        <span class="event-time">8:00 AM</span>
+        <h3 class="event-name">NALANGU</h3>
+        <p class="event-desc">Fun pre-wedding ceremony</p>
       </div>
+    </div>
 
-      <!-- Event 2 -->
-      <div class="timeline-event" style="top: 35%;">
-        <div class="event-diamond"></div>
-        <div class="event-connector left"></div>
-        <div class="event-content left">
-          <span class="event-icon">💍</span>
-          <div class="event-time">11:00 AM</div>
-          <div class="event-name">Muhurtham</div>
-          <div class="event-desc">Main wedding ceremony</div>
-        </div>
+    <div class="timeline-item right">
+      <div class="timeline-diamond"></div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-card">
+        <span class="event-icon">💍</span>
+        <span class="event-time">11:00 AM</span>
+        <h3 class="event-name">MUHURTHAM</h3>
+        <p class="event-desc">Main wedding ceremony</p>
       </div>
+    </div>
 
-      <!-- Event 3 -->
-      <div class="timeline-event" style="top: 60%;">
-        <div class="event-diamond"></div>
-        <div class="event-connector right"></div>
-        <div class="event-content right">
-          <span class="event-icon">🍽️</span>
-          <div class="event-time">1:00 PM</div>
-          <div class="event-name">Wedding Lunch</div>
-          <div class="event-desc">Join us for a feast</div>
-        </div>
+    <div class="timeline-item left">
+      <div class="timeline-diamond"></div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-card">
+        <span class="event-icon">🍽️</span>
+        <span class="event-time">1:00 PM</span>
+        <h3 class="event-name">WEDDING LUNCH</h3>
+        <p class="event-desc">Feast and celebrations</p>
       </div>
+    </div>
 
-      <!-- Event 4 -->
-      <div class="timeline-event" style="top: 85%;">
-        <div class="event-diamond"></div>
-        <div class="event-connector left"></div>
-        <div class="event-content left">
-          <span class="event-icon">✨</span>
-          <div class="event-time">7:00 PM</div>
-          <div class="event-name">Reception</div>
-          <div class="event-desc">An evening of celebration</div>
-        </div>
+    <div class="timeline-item right">
+      <div class="timeline-diamond"></div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-card">
+        <span class="event-icon">✨</span>
+        <span class="event-time">7:00 PM</span>
+        <h3 class="event-name">RECEPTION</h3>
+        <p class="event-desc">Evening celebration</p>
       </div>
     </div>
   </section>
@@ -1833,94 +1831,43 @@
     /* ==============================================
        CELEBRATION TIMELINE LOGIC
     ============================================== */
-    (function() {
-      const section  = document.querySelector('#celebration-timeline');
-      if (!section) return;
-
-      const header   = section.querySelector('.tl-header');
-      const dot      = section.querySelector('.timeline-dot');
-      const line     = section.querySelector('.timeline-line');
-      const contents = section.querySelectorAll('.event-content');
-
-      gsap.fromTo(header, 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: section, start: "top 75%" } }
-      );
-
-      const THRESHOLDS = [0.10, 0.35, 0.60, 0.85];
-      const HYSTERESIS = 0.03;
-      const revealed   = new Array(contents.length).fill(false);
-
-      gsap.set(contents, { opacity: 0, scale: 0.88, y: 8 });
-
-      function getDotRange() {
-        return {
-          topPx:    line.offsetTop,
-          bottomPx: line.offsetTop + line.offsetHeight - dot.offsetHeight
-        };
+    function initTimeline() {
+      const header = document.querySelector('.tl-header');
+      if (header) {
+        gsap.fromTo(header, 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "#celebration-timeline", start: "top 75%" } }
+        );
       }
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: function(self) {
-          const p = self.progress;
-          const { topPx, bottomPx } = getDotRange();
-          gsap.set(dot, { top: topPx + (bottomPx - topPx) * p });
-
-          THRESHOLDS.forEach(function(threshold, i) {
-            if (!revealed[i] && p >= threshold) {
-              revealed[i] = true;
-              gsap.killTweensOf(contents[i]);
-              const startX = contents[i].classList.contains('left') && window.innerWidth > 768 ? 60 : -60;
-              gsap.fromTo(contents[i],
-                { opacity: 0, scale: 0.88, y: 8, x: startX },
-                { opacity: 1, scale: 1, y: 0, x: 0,
-                  duration: 0.7, ease: 'power2.out' }
-              );
-              
-              const diamond = contents[i].closest('.timeline-event').querySelector('.event-diamond');
-              if (diamond) {
-                gsap.fromTo(diamond,
-                  { scale: 1 },
-                  { scale: 1.6, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }
-                );
-              }
-            } else if (revealed[i] && p < threshold - HYSTERESIS) {
-              revealed[i] = false;
-              gsap.killTweensOf(contents[i]);
-              gsap.to(contents[i], {
-                opacity: 0, scale: 0.88, y: 8,
-                duration: 0.2, ease: 'power2.in'
-              });
-            }
-          });
-        },
-        onRefresh: function(self) {
-          const p = self.progress;
-          const { topPx, bottomPx } = getDotRange();
-          gsap.set(dot, { top: topPx + (bottomPx - topPx) * p });
+      gsap.to(".timeline-dot", {
+        top: "95%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#celebration-timeline",
+          start: "top center",
+          end: "bottom center",
+          scrub: 0.6,
         }
       });
 
-      let resizeTimer;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-          ScrollTrigger.refresh();
-        }, 200);
-      });
-
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', function() {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function() {
-            ScrollTrigger.refresh();
-          }, 200);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            gsap.to(card, {
+              opacity: 1,
+              x: 0,
+              duration: 0.7,
+              ease: "power2.out"
+            });
+            observer.unobserve(card);
+          }
         });
-      }
-    })();
+      }, { threshold: 0.2 });
+      
+      document.querySelectorAll('.timeline-card').forEach(card => observer.observe(card));
+    }
 
     window.addEventListener('load', () => {
       initOpeningLogic();
@@ -1939,6 +1886,7 @@
         initProcession();
         initOurMoments();
         initDateReveal();
+        initTimeline();
       }, 500);
     };
 
