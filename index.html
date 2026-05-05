@@ -37,7 +37,7 @@
     body {
       width: 100%;
       min-height: 100vh;
-      overflow-x: clip;
+      overflow-x: hidden;
       background: #FAF7F2;
       font-family: 'Cormorant Garamond', serif;
     }
@@ -59,8 +59,6 @@
       height: 100vh;
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
-      transform: translateZ(0);
     }
 
     .gold-dots-container {
@@ -205,7 +203,19 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      perspective: 1000px;
+      perspective: 1200px;
+      background: #FAF7F2;
+    }
+
+    .fp-vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, transparent 40%, rgba(250, 247, 242, 0.4) 80%, #FAF7F2 100%);
+      pointer-events: none;
+      z-index: 50;
     }
 
     .flower-img {
@@ -270,7 +280,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
+      opacity: 0;
+      transform: translateZ(600px);
+      filter: blur(12px);
+      will-change: transform, opacity, filter;
       transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .person-img {
@@ -280,20 +295,9 @@
       object-fit: contain;
       object-position: bottom center;
       margin-bottom: 80px;
+      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.08));
       z-index: 2;
-      position: absolute;
-      bottom: 0;
-      opacity: 0;
-      transform: scale(1.5) translateZ(0);
-      will-change: transform, opacity;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      filter: none !important;
-      -webkit-filter: none !important;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-      transform-style: preserve-3d;
-      -webkit-transform-style: preserve-3d;
+      position: relative;
     }
 
     .person-info {
@@ -302,8 +306,6 @@
       width: 100%;
       text-align: center;
       opacity: 0;
-      transform: translateY(20px) translateZ(0);
-      will-change: transform, opacity;
       z-index: 3;
     }
     .person-name {
@@ -1086,6 +1088,7 @@
 
   <section id="family-procession">
     <div class="fp-sticky-container">
+      <div class="fp-vignette"></div>
       <div class="fp-header">
         <div class="line"></div>
         <h2>WITH THE BLESSINGS OF</h2>
@@ -1095,7 +1098,7 @@
       <!-- ALL PERSON FRAMES -->
       <!-- Groom Bro -->
       <div class="person-frame" id="frame-groom_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/groom_bro_arvmqr.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">RAHUL</div>
           <div class="person-label">Groom's Brother</div>
@@ -1104,7 +1107,7 @@
 
       <!-- Bride Bro -->
       <div class="person-frame" id="frame-bride_bro">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786913/bride_bro_isqh4j.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">KARTHIK</div>
           <div class="person-label">Bride's Brother</div>
@@ -1113,7 +1116,7 @@
 
       <!-- Groom Sis -->
       <div class="person-frame" id="frame-groom_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786920/groom_sis_trypz4.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">DIVYA</div>
           <div class="person-label">Groom's Sister</div>
@@ -1122,7 +1125,7 @@
 
       <!-- Bride Sis -->
       <div class="person-frame" id="frame-bride_sis">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/bride_sis_untzs6.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">MEENA</div>
           <div class="person-label">Bride's Sister</div>
@@ -1131,7 +1134,7 @@
 
       <!-- Groom Dad -->
       <div class="person-frame" id="frame-groom_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">MR. KUMAR</div>
           <div class="person-label">Groom's Father</div>
@@ -1140,7 +1143,7 @@
 
       <!-- Groom Mom -->
       <div class="person-frame" id="frame-groom_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">MRS. LAKSHMI</div>
           <div class="person-label">Groom's Mother</div>
@@ -1149,7 +1152,7 @@
 
       <!-- Bride Dad -->
       <div class="person-frame" id="frame-bride_dad">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">MR. RAJA</div>
           <div class="person-label">Bride's Father</div>
@@ -1158,7 +1161,7 @@
 
       <!-- Bride Mom -->
       <div class="person-frame" id="frame-bride_mom">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
         <div class="person-info">
           <div class="person-name">MRS. SUMATHI</div>
           <div class="person-label">Bride's Mother</div>
@@ -1167,8 +1170,8 @@
 
       <!-- Final Reveal -->
       <div class="final-frame" id="frame-final">
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" loading="eager" decoding="sync" />
-        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" loading="eager" decoding="sync" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786915/Groom_v8sy6l.png" class="person-img final-groom" />
+        <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786909/bride_qc5i3y.png" class="person-img final-bride" />
         <div class="couple-text">
           <div class="couple-names">ARUN • PRIYA</div>
           <div class="couple-tagline">We joyfully invite you to celebrate our union</div>
@@ -1354,15 +1357,6 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.config({
-      force3D: true,
-      nullTargetWarn: false,
-      autoSleep: 60,
-    });
-    
-    gsap.ticker.lagSmoothing(0);
-    gsap.ticker.fps(60);
-
     const isMobile = () => window.innerWidth < 769;
 
     /* ==============================================
@@ -1488,148 +1482,179 @@
 
       for (let i = 0; i < config.back.count; i++) placeFlower(config.back);
       for (let i = 0; i < config.mid.count; i++) placeFlower(config.mid);
-      for (let i = 0; i < config.front.count; i++) place    /* ==============================================
-       FAMILY PROCESSION — PURE SCROLL LOGIC
+      for (let i = 0; i < config.front.count; i++) placeFlower(config.front);
+    }
+
+    /* ==============================================
+       FAMILY PROCESSION — Z-AXIS MASTER TIMELINE
     ============================================== */
     function initProcession() {
+      const isMob = isMobile();
       const section = document.getElementById('family-procession');
       const sticky = section.querySelector('.fp-sticky-container');
       
-      ScrollTrigger.getAll().forEach(t => { if (t.trigger === section) t.kill(); });
-      document.querySelectorAll('.parents-desktop-grid').forEach(el => el.remove());
+      // Cleanup previous triggers
+      ScrollTrigger.getAll().forEach(t => {
+        if (t.trigger === section) t.kill();
+      });
 
-      const isMob = window.innerWidth < 769;
-      const personElements = [];
-      const nameElements = [];
+      const tl = gsap.timeline({ paused: true });
+
+      const addStep = (el, infoEl, stepId) => {
+        if (!el) return;
+        
+        const fLayer = document.createElement('div');
+        fLayer.className = 'person-frame flower-3d-wrapper';
+        fLayer.style.zIndex = 0;
+        sticky.appendChild(fLayer);
+        injectFlowers(fLayer, stepId);
+
+        const p = tl.duration();
+        
+        // Entry - Cinematic Z-depth reveal
+        tl.fromTo(el, 
+          { autoAlpha: 0, z: 600, filter: "blur(12px)", zIndex: 10 },
+          { autoAlpha: 1, z: 0, filter: "blur(0px)", duration: 2, ease: "power2.out" },
+          p
+        );
+        tl.fromTo(fLayer, 
+          { autoAlpha: 0, z: 400, filter: "blur(10px)", zIndex: 0 },
+          { autoAlpha: 1, z: 0, filter: "blur(0px)", duration: 2, ease: "power2.out" },
+          p
+        );
+        if (infoEl) tl.fromTo(infoEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.8 }, p + 1);
+        
+        // Hold - Extended viewing time
+        tl.to(el, { duration: 3 }); 
+
+        // Exit - Shrink into the distance
+        const exitP = p + 4; 
+        tl.to(el, { z: -400, autoAlpha: 0, filter: "blur(6px)", duration: 2, ease: "power2.in" }, exitP);
+        tl.to(fLayer, { z: -600, autoAlpha: 0, filter: "blur(8px)", duration: 2, ease: "power2.in" }, exitP);
+        if (infoEl) tl.to(infoEl, { autoAlpha: 0, y: -20, duration: 0.8 }, exitP);
+      };
 
       if (isMob) {
         const order = ['groom_bro', 'bride_bro', 'groom_sis', 'bride_sis', 'groom_dad', 'groom_mom', 'bride_dad', 'bride_mom', 'final'];
         order.forEach(id => {
           const frame = document.getElementById('frame-' + id);
           if (frame) {
-            personElements.push(Array.from(frame.querySelectorAll('.person-img')));
-            nameElements.push(frame.querySelector(id === 'final' ? '.couple-text' : '.person-info'));
+            const info = id === 'final' ? frame.querySelector('.couple-text') : frame.querySelector('.person-info');
+            addStep(frame, info, id);
           }
         });
       } else {
-        const broL = document.getElementById('frame-groom_bro');
-        const broR = document.getElementById('frame-bride_bro');
-        broL.classList.add('desktop-left'); broR.classList.add('desktop-right');
-        personElements.push([broL.querySelector('.person-img'), broR.querySelector('.person-img')]);
-        nameElements.push([broL.querySelector('.person-info'), broR.querySelector('.person-info')]);
+        // Desktop Pairs Logic
+        const pairs = [
+          { l: 'groom_bro', r: 'bride_bro', label: 'bros' },
+          { l: 'groom_sis', r: 'bride_sis', label: 'sisters' },
+          { l: 'groom_parents', r: 'bride_parents', label: 'parents', isCustom: true }
+        ];
 
-        const sisL = document.getElementById('frame-groom_sis');
-        const sisR = document.getElementById('frame-bride_sis');
-        sisL.classList.add('desktop-left'); sisR.classList.add('desktop-right');
-        personElements.push([sisL.querySelector('.person-img'), sisR.querySelector('.person-img')]);
-        nameElements.push([sisL.querySelector('.person-info'), sisR.querySelector('.person-info')]);
+        pairs.forEach(pair => {
+          const p = tl.duration();
+          if (pair.isCustom) {
+             // Groom's Parents
+            const gParents = document.createElement('div');
+            gParents.className = 'parents-desktop-grid person-frame';
+            gParents.innerHTML = `
+              <div class="parents-column" style="width:100%">
+                <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" />
+                <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" />
+                <div class="parents-column-label">GROOM'S PARENTS</div>
+              </div>
+            `;
+            sticky.appendChild(gParents);
+            addStep(gParents, null, 'gParents');
 
-        const gParents = document.createElement('div');
-        gParents.className = 'parents-desktop-grid person-frame';
-        gParents.style.justifyContent = 'center';
-        gParents.innerHTML = `
-          <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786918/groom_dad_xqz41v.png" class="person-img" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786919/groom_mom_kvq4lr.png" class="person-img" />
-            <div class="parents-column-label person-info">GROOM'S PARENTS</div>
-          </div>
-        `;
-        sticky.appendChild(gParents);
-        personElements.push(Array.from(gParents.querySelectorAll('.person-img')));
-        nameElements.push(gParents.querySelector('.person-info'));
-
-        const bParents = document.createElement('div');
-        bParents.className = 'parents-desktop-grid person-frame';
-        bParents.style.justifyContent = 'center';
-        bParents.innerHTML = `
-          <div class="parents-column" style="width:100%">
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" class="person-img" />
-            <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" class="person-img" />
-            <div class="parents-column-label person-info">BRIDE'S PARENTS</div>
-          </div>
-        `;
-        sticky.appendChild(bParents);
-        personElements.push(Array.from(bParents.querySelectorAll('.person-img')));
-        nameElements.push(bParents.querySelector('.person-info'));
+            // Bride's Parents
+            const bParents = document.createElement('div');
+            bParents.className = 'parents-desktop-grid person-frame';
+            bParents.innerHTML = `
+              <div class="parents-column" style="width:100%">
+                <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786912/bride_dad_c25ney.png" />
+                <img src="https://res.cloudinary.com/darbjeyc2/image/upload/v1777786916/bride_mom_pzij5t.png" />
+                <div class="parents-column-label">BRIDE'S PARENTS</div>
+              </div>
+            `;
+            sticky.appendChild(bParents);
+            // We manually overlap them in desktop
+            tl.fromTo(bParents, { autoAlpha: 0, z: 600, filter: "blur(12px)" }, { autoAlpha: 1, z: 0, filter: "blur(0px)", duration: 2 }, p + 5);
+            tl.to(bParents, { z: -400, autoAlpha: 0, filter: "blur(6px)", duration: 2, delay: 3 });
+          } else {
+            const elL = document.getElementById('frame-' + pair.l);
+            const elR = document.getElementById('frame-' + pair.r);
+            if (elL && elR) {
+              elL.classList.add('desktop-left'); elR.classList.add('desktop-right');
+              addStep(elL, elL.querySelector('.person-info'), pair.label + 'L');
+              tl.fromTo(elR, 
+                { autoAlpha: 0, z: 600, filter: "blur(12px)" },
+                { autoAlpha: 1, z: 0, filter: "blur(0px)", duration: 2, ease: "power2.out" },
+                p
+              );
+              tl.fromTo(elR.querySelector('.person-info'), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.8 }, p + 1);
+              tl.to(elR, { z: -400, autoAlpha: 0, filter: "blur(6px)", duration: 2, ease: "power2.in" }, p + 4);
+              tl.to(elR.querySelector('.person-info'), { autoAlpha: 0, y: -20, duration: 0.8 }, p + 4);
+            }
+          }
+        });
 
         const final = document.getElementById('frame-final');
-        personElements.push(Array.from(final.querySelectorAll('.person-img')));
-        nameElements.push(final.querySelector('.couple-text'));
+        addStep(final, final.querySelector('.couple-text'), 'final');
       }
 
-      const totalSteps = personElements.length;
-      let currentStep = -1;
-      let isAnimating = false;
-      const STEP_HEIGHT = window.innerHeight * 1.2;
-      
-      section.style.height = `${(totalSteps * STEP_HEIGHT) + window.innerHeight}px`;
+      // --- THE BUTTERY SMOOTH ENGINE ---
+      let targetProgress = 0;
+      let currentProgress = 0;
+      const lerpAmount = 0.08;
 
-      const scrollHandler = () => {
-        const processionTop = section.getBoundingClientRect().top + window.scrollY;
-        const relativeScroll = window.scrollY - processionTop;
-        const newStep = Math.floor(relativeScroll / STEP_HEIGHT);
-        
-        if (newStep !== currentStep && newStep >= 0 && newStep < totalSteps && !isAnimating) {
-          isAnimating = true;
-          showStep(newStep, currentStep);
-          currentStep = newStep;
-          setTimeout(() => { isAnimating = false; }, 600);
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "+=8000",
+        pin: true,
+        scrub: false, // We handle scrubbing manually
+        onUpdate: (self) => {
+          targetProgress = self.progress;
         }
-      };
+      });
 
-      window.addEventListener('scroll', scrollHandler, { passive: true });
-      scrollHandler();
-
-      function showStep(newStep, oldStep) {
-        if (oldStep >= 0 && oldStep < totalSteps) {
-          const oldEl = personElements[oldStep];
-          const oldName = nameElements[oldStep];
-          const targets = [];
-          if (Array.isArray(oldEl)) targets.push(...oldEl); else if (oldEl) targets.push(oldEl);
-          if (Array.isArray(oldName)) targets.push(...oldName); else if (oldName) targets.push(oldName);
-          
-          if (targets.length) {
-            gsap.to(targets, {
-              scale: 0.5,
-              opacity: 0,
-              duration: 0.35,
-              ease: "power2.in",
-              force3D: true,
-              overwrite: true
-            });
-          }
-        }
+      // Smooth Lerp Loop
+      gsap.ticker.add(() => {
+        currentProgress += (targetProgress - currentProgress) * lerpAmount;
+        tl.progress(currentProgress);
         
-        setTimeout(() => {
-          const newEl = personElements[newStep];
-          const newName = nameElements[newStep];
-          
-          const newElTargets = [];
-          if (Array.isArray(newEl)) newElTargets.push(...newEl); else if (newEl) newElTargets.push(newEl);
-          
-          if (newElTargets.length) {
-            gsap.fromTo(newElTargets,
-              { scale: 1.5, opacity: 0 },
-              { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", force3D: true, overwrite: true }
-            );
-          }
-          
-          const newNameTargets = [];
-          if (Array.isArray(newName)) newNameTargets.push(...newName); else if (newName) newNameTargets.push(newName);
-          
-          if (newNameTargets.length) {
-            gsap.fromTo(newNameTargets,
-              { opacity: 0, y: 20 },
-              { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", delay: 0.25, overwrite: true }
-            );
-          }
-        }, 200);
-      }
+        // Subtle Parallax Tilt based on scroll speed
+        const velocity = ScrollTrigger.getById(section)?.getVelocity() || 0;
+        const tilt = gsap.utils.clamp(-5, 5, velocity / 200);
+        gsap.set('.person-frame:not(.flower-3d-wrapper)', {
+          rotationX: tilt,
+          overwrite: 'auto'
+        });
+      });
 
-      // Global Parallax 3D Effect for flowers
-      gsap.set('.flower-3d-wrapper', { transformOrigin: "50% 50% -120px" });
-      gsap.to('.flower-3d-wrapper', { rotationX: 3.5, duration: 3.5, ease: "sine.inOut", yoyo: true, repeat: -1 });
-      gsap.to('.flower-3d-wrapper', { rotationY: 4.5, duration: 4.2, ease: "sine.inOut", yoyo: true, repeat: -1 });
+      // Atmospheric Sway (Alive Motion)
+      gsap.to('.person-frame:not(.flower-3d-wrapper)', {
+        y: "-=15",
+        rotationZ: 0.5,
+        duration: 3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: { each: 0.2, from: "random" }
+      });
+
+      // Flower Sway (Different speed for depth)
+      gsap.to('.flower-3d-wrapper', {
+        rotationX: 4,
+        rotationY: 5,
+        duration: 4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1
+      });
+
+      ScrollTrigger.refresh();
     }
 
     /* ==============================================
@@ -2050,20 +2075,25 @@
       initTimeline();
     });
 
+    // Re-init on resize to handle orientation changes
     let rt;
     const handleGlobalResize = () => {
       clearTimeout(rt);
       rt = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 250);
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        initProcession();
+        initOurMoments();
+        initDateReveal();
+        initTimeline();
+      }, 500);
     };
 
-    window.addEventListener('resize', handleGlobalResize, { passive: true });
+    window.addEventListener('resize', handleGlobalResize);
     
     // Crucial for iOS Safari where address bar hiding changes visual viewport 
     // but doesn't immediately fire window.resize
     if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleGlobalResize, { passive: true });
+      window.visualViewport.addEventListener('resize', handleGlobalResize);
     }
   </script>
 </body>
